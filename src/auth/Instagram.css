@@ -1,0 +1,10 @@
+.card {
+    max-width: 10rem;
+    align-items: center
+  }
+  
+.instagram-logo {
+    height: 5vmin;
+    width: 5vmin;
+    pointer-events: none;
+}
