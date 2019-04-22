@@ -4,23 +4,27 @@ import { connect } from 'react-redux';
 
 import Spinner from '../spinner/spinner';
 import { withTripsService } from '../hoc/with-trips-service';
-import { tripsLoaded, tripsRequested } from '../../actions';
+import { tripsLoaded, tripsRequested, tripsError } from '../../actions';
 import { compose } from '../../utils/compose';
+import ErrorIndicator from '../error-indicator/error-indicator';
 
 class TripList extends Component {
 
     componentDidMount() {
-        const { tripsService, tripsLoaded, tripsRequested } = this.props;
+        const { tripsService, tripsLoaded, tripsRequested, tripsError } = this.props;
         tripsRequested();
         tripsService.getTrips()
-            .then((data) => tripsLoaded(data));
+            .then((data) => tripsLoaded(data))
+            .catch((err) => tripsError(err));
     }
 
     render() {
-        const { trips, loading } = this.props;
+        const { trips, loading, error } = this.props;
 
         if (loading) { return <Spinner /> }
         
+        if (error) { return <ErrorIndicator /> }
+
         return (
             <ul>
                 {
@@ -36,11 +40,11 @@ class TripList extends Component {
 
 }
 
-const mapStateToProps = ({ trips, loading }) => {
-    return { trips, loading };
+const mapStateToProps = ({ trips, loading, error }) => {
+    return { trips, loading, error };
 }
 
-const mapDispatchToProps = { tripsLoaded, tripsRequested };
+const mapDispatchToProps = { tripsLoaded, tripsRequested, tripsError };
 
 export default compose (
     withTripsService(),

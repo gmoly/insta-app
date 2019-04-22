@@ -1,6 +1,7 @@
 const initialState = {
     trips: [],
-    loading: true
+    loading: true,
+    error: null
 };
 
 const reducer = (state = initialState, action) => {
@@ -9,12 +10,20 @@ const reducer = (state = initialState, action) => {
         case 'TRIPS_REQUESTED':
         return {
             trips: [], 
-            loading: true
+            loading: true,
+            error: null
         };
         case 'TRIPS_LOADED': 
         return {
             trips: action.payload,
-            loading: false
+            loading: false,
+            error: null
+        };
+        case 'TRIPS_ERROR':
+        return {
+            trips: [],
+            loading: false,
+            error: action.payload
         };
 
         default: 

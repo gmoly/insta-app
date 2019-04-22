@@ -11,6 +11,13 @@ const tripsRequested = () => {
     }
 };
 
+const tripsError = (error) => {
+    return {
+        type: 'TRIPS_ERROR',
+        payload: error
+    }
+};
+
 export {
-    tripsLoaded, tripsRequested
+    tripsLoaded, tripsRequested, tripsError
 };
