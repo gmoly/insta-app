@@ -7,19 +7,19 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     
     switch (action.type) {
-        case 'TRIPS_REQUESTED':
+        case 'FETCH_TRIPS_REQUEST':
         return {
             trips: [], 
             loading: true,
             error: null
         };
-        case 'TRIPS_LOADED': 
+        case 'FETCH_TRIPS_SUCCESS': 
         return {
             trips: action.payload,
             loading: false,
             error: null
         };
-        case 'TRIPS_ERROR':
+        case 'FETCH_TRIPS_FAILURE':
         return {
             trips: [],
             loading: false,

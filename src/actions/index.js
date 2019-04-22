@@ -1,23 +1,30 @@
 const tripsLoaded = (newTrips) => {
     return {
-        type: 'TRIPS_LOADED',
+        type: 'FETCH_TRIPS_SUCCESS',
         payload: newTrips
     };
 };
 
 const tripsRequested = () => {
     return {
-        type: 'TRIPS_REQUESTED'
+        type: 'FETCH_TRIPS_REQUEST'
     }
 };
 
 const tripsError = (error) => {
     return {
-        type: 'TRIPS_ERROR',
+        type: 'FETCH_TRIPS_FAILURE',
         payload: error
     }
 };
 
+const fetchTrips = (tripsService, dispatch) => () => {
+    dispatch(tripsRequested());
+    tripsService.getTrips()
+    .then((data) => dispatch(tripsLoaded(data)))
+    .catch((err) => dispatch(tripsError(err)));
+}
+
 export {
-    tripsLoaded, tripsRequested, tripsError
+    fetchTrips
 };
