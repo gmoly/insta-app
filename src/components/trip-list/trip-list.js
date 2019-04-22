@@ -11,11 +11,7 @@ import ErrorIndicator from '../error-indicator/error-indicator';
 class TripList extends Component {
 
     componentDidMount() {
-        const { tripsService, tripsLoaded, tripsRequested, tripsError } = this.props;
-        tripsRequested();
-        tripsService.getTrips()
-            .then((data) => tripsLoaded(data))
-            .catch((err) => tripsError(err));
+      this.props.fetchTrips();
     }
 
     render() {
@@ -44,7 +40,19 @@ const mapStateToProps = ({ trips, loading, error }) => {
     return { trips, loading, error };
 }
 
-const mapDispatchToProps = { tripsLoaded, tripsRequested, tripsError };
+const mapDispatchToProps = (dispatch, ownProps) =>
+{
+    const { tripsService } = ownProps;
+
+    return {
+        fetchTrips: () => {
+            dispatch(tripsRequested());
+            tripsService.getTrips()
+            .then((data) => dispatch(tripsLoaded(data)))
+            .catch((err) => dispatch(tripsError(err)));
+        }
+    }     
+ };
 
 export default compose (
     withTripsService(),
