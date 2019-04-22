@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import InstagramApi from '../services/InstagramApi';
 import ContentList from './ContentList';
+import axios from 'axios';
 
 export default class ContentItem extends Component {
 
@@ -18,6 +19,9 @@ export default class ContentItem extends Component {
     }
 
     render() {
+
+        axios.get('https://base-app-3e6b5.firebaseio.com/trips.json').then(response => console.log(response));
+
         var authToken = this.props.authToken;
 
         if (authToken) {
