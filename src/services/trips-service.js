@@ -1,3 +1,7 @@
+import InstagramService from './instagram-service';
+
+const instagramService = new InstagramService();
+
 export default class TripsService {
 
     data = [
@@ -29,4 +33,9 @@ export default class TripsService {
             }, 1000);
         });
     }
+
+    getProfileItems(token) {
+       return instagramService.getProfileItems(token);
+    }
+
 }

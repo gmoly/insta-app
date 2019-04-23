@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import logo from './instagram-logo.png';
 import './Instagram.css';
-import InstagramApi from '../services/InstagramApi';
 
 class Instagram extends Component {
 
