@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TripListItem from './trip-list-item';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import Spinner from '../spinner/spinner';
 import { withTripsService } from '../hoc/with-trips-service';
@@ -42,15 +43,15 @@ class TripListContainer extends Component {
 }
 
 
-const mapStateToProps = ({ trips, loading, error }) => {
+const mapStateToProps = ( { tripList : { trips, loading, error } }) => {
     return { trips, loading, error };
 }
 
 const mapDispatchToProps = (dispatch, { tripsService }) =>
 {
-    return {
-        fetchTrips: fetchTrips(tripsService, dispatch)
-    }; 
+    return bindActionCreators (
+        { fetchTrips: fetchTrips(tripsService) },
+         dispatch); 
  };
 
 export default compose (

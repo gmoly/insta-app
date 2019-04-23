@@ -18,7 +18,7 @@ const tripsError = (error) => {
     }
 };
 
-const fetchTrips = (tripsService, dispatch) => () => {
+const fetchTrips = (tripsService) => () => (dispatch) => {
     dispatch(tripsRequested());
     tripsService.getTrips()
     .then((data) => dispatch(tripsLoaded(data)))
