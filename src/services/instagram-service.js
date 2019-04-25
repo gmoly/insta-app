@@ -13,7 +13,7 @@ export default class InstagramService {
       return await res.json();
     };
 
-    getProfileInfo = async (token) => {
+      getProfileInfo = async (token) => {
         const info = await this.getResource(`/`,token);
         return this._transformProfileInfo(info);
       };

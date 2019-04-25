@@ -38,4 +38,8 @@ export default class TripsService {
        return instagramService.getProfileItems(token);
     }
 
+    getProfileInfo(token) {
+        return instagramService.getProfileInfo(token);
+    }
+
 }

@@ -27,7 +27,7 @@ const InstItemList = ({ items }) => {
 class InstItemListContainer extends Component {
 
     componentDidMount() {
-      this.props.fetchInstItems(localStorage.authToken);
+      this.props.fetchInstItems('123');
     }
 
     render() {
@@ -43,18 +43,18 @@ class InstItemListContainer extends Component {
 }
 
 
-const mapStateToProps = ( { instItemList : { items, loading, error } }) => {
-    return { items, loading, error };
+const mapStateToProps = ( { instItemList : { items, loading, error }, authData : { token } }) => {
+    return { items, loading, error, token };
 }
 
 const mapDispatchToProps = (dispatch, { tripsService }) =>
 {
     return bindActionCreators (
-        { fetchInstItems: (token) => fetchInstItems(tripsService, token) },
+        { fetchInstItems: fetchInstItems(tripsService, "id") },
          dispatch); 
  };
 
 export default compose (
     withTripsService(),
     connect(mapStateToProps, mapDispatchToProps)
-)(TripListContainer)
+)(InstItemListContainer)
