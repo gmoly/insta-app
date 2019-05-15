@@ -27,7 +27,7 @@ const InstItemList = ({ items }) => {
 class InstItemListContainer extends Component {
 
     componentDidMount() {
-      this.props.fetchInstItems('123');
+        this.props.loadInstItems(this.props.token);
     }
 
     render() {
@@ -49,8 +49,8 @@ const mapStateToProps = ( { instItemList : { items, loading, error }, authData :
 
 const mapDispatchToProps = (dispatch, { tripsService }) =>
 {
-    return bindActionCreators (
-        { fetchInstItems: fetchInstItems(tripsService, "id") },
+   return bindActionCreators (
+         { loadInstItems: (token) => dispatch(fetchInstItems(tripsService, token)) },
          dispatch); 
  };
 
