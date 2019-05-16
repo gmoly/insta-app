@@ -13,7 +13,7 @@ export default class Auth extends Component {
                 return <div>Auth issue, please login again!</div>
             }
         }
-        return <Redirect to='/' />
+        return <Redirect to='/inst' />
  }
 
 }

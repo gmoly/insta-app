@@ -21,7 +21,7 @@ const updateAuthData = (state, action) => {
             return {};
             case 'AUTH_SET_USER':
             return {
-                ...state,
+                ...state.authData,
                 user: action.payload,
                 loading: false,
                 err: null

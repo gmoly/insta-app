@@ -46,4 +46,4 @@ const signOutInstUser = () => () => (dispatch) => {
     dispatch(authDiscardToken);
 }
 
-export default fetchInstItems;
+export {fetchInstItems, authInstUser};
