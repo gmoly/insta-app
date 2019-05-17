@@ -8,7 +8,7 @@ const reducer = (state, action) => {
             tripList: updateTripList(state, action),
             instItemList: updateInstItemList(state, action),
             authData: updateAuthData(state, action),
-            trip: tripActions(state, action)
+            tripData: tripActions(state, action)
         };
 }
 

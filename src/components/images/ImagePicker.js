@@ -17,7 +17,7 @@ class ImagePicker extends Component {
     const newerPickedImage = 
       pickedImage.has(image.value) ? 
         pickedImage.delete(image.value) : 
-          pickedImage.set(image.value, image.src)
+          pickedImage.set(image.value, image.object)
           
     this.setState({picked: newerPickedImage})
 

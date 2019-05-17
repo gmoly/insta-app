@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import { TripsPage } from '../pages/trips-page';
 import { UserDataPage } from '../pages/user-data-page';
 import { ContentsPage } from '../pages/contents-page';
+import { NewTripPage } from '../pages/new-trip-page';
 
 import Instagram from '../../auth/Instagram';
 
@@ -16,6 +17,7 @@ const App = () => {
             <Route path="/auth-instagram" exect component={UserDataPage}/>
             <Route path="/trips" component={TripsPage} exact />
             <Route path="/inst" component={ContentsPage} exact />
+            <Route path="/new-trip" component={NewTripPage} exact />
         </Switch>
         </div>
     );

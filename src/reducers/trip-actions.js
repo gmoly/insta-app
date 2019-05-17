@@ -13,7 +13,7 @@ const tripActions = (state, action) => {
             };
            
             default: 
-                return state.trip;
+                return state.tripData;
     }
 }
 

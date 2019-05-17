@@ -8,7 +8,6 @@ import { withTripsService } from '../hoc/with-trips-service';
 import { fetchInstItems, createTrip } from '../../actions';
 import { compose } from '../../utils/compose';
 import ErrorIndicator from '../error-indicator/error-indicator';
-import _ from "lodash";
 
 import ImagePicker from '../images/ImagePicker';
 
@@ -17,7 +16,7 @@ const InstItemList = ({ items, createTrip }) => {
     return (
         <ImagePicker 
         images={items.map((item, i) => ({src: item.images.thumbnail.url, value: i, object: item}))}
-        onPick={ (images)  => createTrip( images.map( element => element.object) ) }
+        onPick={ (images)  => createTrip(images.map( element => { return element.src }) ) }
         multiple
         />
        /* <ul>
