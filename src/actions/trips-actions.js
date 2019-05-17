@@ -7,4 +7,8 @@ const fetchTrips = (tripsService) => () => (dispatch) => {
     .catch((err) => dispatch(itemsError('FETCH_TRIPS_FAILURE',err)));
 }
 
-export default fetchTrips;
+const createTrip = (tripData) => () => (dispatch) => {
+    dispatch(itemsLoaded('CREATE_TRIP', tripData))
+}
+
+export { fetchTrips, createTrip };

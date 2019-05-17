@@ -5,13 +5,22 @@ import { bindActionCreators } from 'redux';
 
 import Spinner from '../spinner/spinner';
 import { withTripsService } from '../hoc/with-trips-service';
-import { fetchInstItems } from '../../actions';
+import { fetchInstItems, createTrip } from '../../actions';
 import { compose } from '../../utils/compose';
 import ErrorIndicator from '../error-indicator/error-indicator';
+import _ from "lodash";
 
-const InstItemList = ({ items }) => {
+import ImagePicker from '../images/ImagePicker';
+
+const InstItemList = ({ items, createTrip }) => {
+    var imageList = items.map( element => { return element.images.thumbnail.url } )
     return (
-        <ul>
+        <ImagePicker 
+        images={items.map((item, i) => ({src: item.images.thumbnail.url, value: i, object: item}))}
+        onPick={ (images)  => createTrip( images.map( element => element.object) ) }
+        multiple
+        />
+       /* <ul>
             {
                 items.map((item) => {
                     return (
@@ -19,10 +28,9 @@ const InstItemList = ({ items }) => {
                     );
                 })
             }
-        </ul>
+        </ul>*/
     );
 };
-
 
 class InstItemListContainer extends Component {
 
@@ -31,13 +39,13 @@ class InstItemListContainer extends Component {
     }
 
     render() {
-        const { items, loading, error } = this.props;
+        const { items, loading, error, createTrip } = this.props;
 
         if (loading) { return <Spinner /> }
         
         if (error) { return <ErrorIndicator /> }
 
-        return <InstItemList items={ items } />
+        return <InstItemList items={ items } createTrip={ createTrip }/>
     }
 
 }
@@ -50,7 +58,8 @@ const mapStateToProps = ( { instItemList : { items, loading, error }, authData :
 const mapDispatchToProps = (dispatch, { tripsService }) =>
 {
    return bindActionCreators (
-         { loadInstItems: (token) => dispatch(fetchInstItems(tripsService, token)) },
+         { loadInstItems: (token) => dispatch(fetchInstItems(tripsService, token)),
+           createTrip: (tripData) => dispatch(createTrip(tripData)) },
          dispatch); 
  };
 
