@@ -42,4 +42,26 @@ export default class TripsService {
         return instagramService.getProfileInfo(token);
     }
 
+    mapInstItemsToTrip(items, userId) {
+       return {
+            id: '',
+            userId: userId,
+            title: '',
+            description: '',
+            baseStyle: {},
+            places: items.map((item) => { return {
+                    placeTitle: item.title,
+                    placeDescription: item.description,
+                    media: item.images,
+                    location: item.location,
+                    source: {
+                        id: item.id,
+                        type: 'INSTAGRAM'
+                    },
+                    style: {}
+                }
+                })
+        }
+    }
+
 }

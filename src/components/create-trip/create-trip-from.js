@@ -1,14 +1,13 @@
 import React from 'react';
 
-const TripForm = ({ items }) => {
+const TripForm = ( { items } ) => {
     return(
         <ul>
             {
-                items.map((item) => {
+                items.places.map((item, i) => {
                     return (
-                       <li key={item.id}>
-                        <span>{item.description}</span>
-                        <img src={item.images.thumbnail.url} />
+                       <li key={i}>
+                        <span>{item.placeDescription}</span>
                        </li> 
                     );
                 })

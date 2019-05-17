@@ -11,12 +11,12 @@ import ErrorIndicator from '../error-indicator/error-indicator';
 
 import ImagePicker from '../images/ImagePicker';
 
-const InstItemList = ({ items, createTrip }) => {
+const InstItemList = ({ items, createTrip, userId }) => {
     var imageList = items.map( element => { return element.images.thumbnail.url } )
     return (
         <ImagePicker 
         images={items.map((item, i) => ({src: item.images.thumbnail.url, value: i, object: item}))}
-        onPick={ (images)  => createTrip(images.map( element => { return element.src }) ) }
+        onPick={ (images)  => createTrip(images.map( element => { return element.src }), userId ) }
         multiple
         />
        /* <ul>
@@ -38,27 +38,27 @@ class InstItemListContainer extends Component {
     }
 
     render() {
-        const { items, loading, error, createTrip } = this.props;
+        const { items, loading, error, createTrip, user } = this.props;
 
         if (loading) { return <Spinner /> }
         
         if (error) { return <ErrorIndicator /> }
 
-        return <InstItemList items={ items } createTrip={ createTrip }/>
+        return <InstItemList items={ items } createTrip={ createTrip } userId={ user.id }/>
     }
 
 }
 
 
-const mapStateToProps = ( { instItemList : { items, loading, error }, authData : { token } }) => {
-    return { items, loading, error, token };
+const mapStateToProps = ( { instItemList : { items, loading, error }, authData : { token, user } }) => {
+    return { items, loading, error, token, user };
 }
 
 const mapDispatchToProps = (dispatch, { tripsService }) =>
 {
    return bindActionCreators (
          { loadInstItems: (token) => dispatch(fetchInstItems(tripsService, token)),
-           createTrip: (tripData) => dispatch(createTrip(tripData)) },
+           createTrip: (tripData, userId) => dispatch(createTrip(tripsService, tripData, userId)) },
          dispatch); 
  };
 

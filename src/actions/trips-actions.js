@@ -7,7 +7,8 @@ const fetchTrips = (tripsService) => () => (dispatch) => {
     .catch((err) => dispatch(itemsError('FETCH_TRIPS_FAILURE',err)));
 }
 
-const createTrip = (tripData) => () => (dispatch) => {
+const createTrip = (tripService, newTrip, userId) => () => (dispatch) => {
+    const tripData = tripService.mapInstItemsToTrip(newTrip, userId)
     dispatch(itemsLoaded('CREATE_TRIP', tripData))
 }
 
