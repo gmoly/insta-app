@@ -1,4 +1,5 @@
 import InstagramService from './instagram-service';
+import { database } from './firebase-service';
 
 const instagramService = new InstagramService();
 
@@ -43,9 +44,15 @@ export default class TripsService {
     }
 
     saveTrip(tripData) {
-        return new Promise((resolve, reject) => {
-            resolve(console.log(tripData))
-        } );
+        const id = tripData.id;
+        const result = { ...tripData }
+        delete result.id
+        if(id===null || id==='') {
+            return database.ref('/trips').push(result);
+        } else {
+            return database.ref('/trips/' + tripData.id).set(result);            
+        }
+       
     }
 
     mapInstItemsToTrip(items, userId) {

@@ -14,7 +14,10 @@ const createTrip = (tripService, newTrip, userId) => () => (dispatch) => {
 
 const saveTrip = (tripData, tripService) => () => (dispatch) => {
     tripService.saveTrip(tripData)
-    .then(() => dispatch(itemsRequested('SAVE_TRIP')))
+    .then((result) => {
+        tripData.id = result.key
+        dispatch(itemsLoaded('SAVE_TRIP', tripData))
+    })
     .catch((err) => dispatch(itemsError('SAVE_TRIP_FAILURE',err)) );
 }
 

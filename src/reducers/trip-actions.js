@@ -10,10 +10,12 @@ const tripActions = (state, action) => {
         switch (action.type) {
             case 'CREATE_TRIP':
             return {
-                trip: action.payload,
+                trip: action.payload
             };
             case 'SAVE_TRIP':
-            return { };
+            return {
+                trip: action.payload
+             };
             case 'SAVE_TRIP_FAILURE':
             return {
                 ...state.tripData,

@@ -10,12 +10,14 @@ export default class TripForm extends Component {
     }
   
     getInputValue() {
-      return ( { "title": this.refs.generalTitle.value,
-                 "description": this.refs.generalDescription.value 
+      return ( { ...this.props.items,
+                 'title': this.refs.generalTitle.value,
+                 'description': this.refs.generalDescription.value 
                 } )
     }
   
     setInputValue(val) {
+      this.refs.generalId.value = val.id
       this.refs.generalTitle.value = val.title
       this.refs.generalDescription.value = val.description
     }
@@ -27,6 +29,7 @@ export default class TripForm extends Component {
   
     render() { 
        const { items } = this.props
+       console.log(items);
         return(
             <form onSubmit={ (e) => this.handleSubmit(e)}>
                 <fieldset>
@@ -81,7 +84,7 @@ export default class TripForm extends Component {
                 <div className="form-group row">
                 <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Trip id</label>
                 <div className="col-sm-10">
-                    <input type="text" readonly="" className="form-control-plaintext" id="tripId" defaultValue={id} />
+                    <input ref="generalId" type="text" readOnly className="form-control-plaintext" id="tripId" defaultValue={id} />
                 </div>
             </div>
             )
