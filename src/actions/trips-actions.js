@@ -12,4 +12,10 @@ const createTrip = (tripService, newTrip, userId) => () => (dispatch) => {
     dispatch(itemsLoaded('CREATE_TRIP', tripData))
 }
 
-export { fetchTrips, createTrip };
+const saveTrip = (tripData, tripService) => () => (dispatch) => {
+    tripService.saveTrip(tripData)
+    .then(() => dispatch(itemsRequested('SAVE_TRIP')))
+    .catch((err) => dispatch(itemsError('SAVE_TRIP_FAILURE',err)) );
+}
+
+export { fetchTrips, createTrip, saveTrip };

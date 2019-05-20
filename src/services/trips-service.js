@@ -42,6 +42,12 @@ export default class TripsService {
         return instagramService.getProfileInfo(token);
     }
 
+    saveTrip(tripData) {
+        return new Promise((resolve, reject) => {
+            resolve(console.log(tripData))
+        } );
+    }
+
     mapInstItemsToTrip(items, userId) {
        return {
             id: '',

@@ -2,7 +2,8 @@ const tripActions = (state, action) => {
 
     if (state === undefined){
         return {
-            trip: []
+            trip: [],
+            err: null
         };
     }
 
@@ -11,6 +12,13 @@ const tripActions = (state, action) => {
             return {
                 trip: action.payload,
             };
+            case 'SAVE_TRIP':
+            return { };
+            case 'SAVE_TRIP_FAILURE':
+            return {
+                ...state.tripData,
+                err: action.payload
+            }
            
             default: 
                 return state.tripData;
