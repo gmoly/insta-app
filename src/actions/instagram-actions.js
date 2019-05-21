@@ -43,7 +43,7 @@ const authInstUser = (tripsService, token) => () => (dispatch) => {
 }
 
 const signOutInstUser = () => () => (dispatch) => {
-    dispatch(authDiscardToken);
+    dispatch(authDiscardToken());
 }
 
-export {fetchInstItems, authInstUser};
+export {fetchInstItems, authInstUser, signOutInstUser};

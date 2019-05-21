@@ -18,7 +18,12 @@ const updateAuthData = (state, action) => {
                 err: null
             };
             case 'AUTH_DISCARD_TOKEN': 
-            return {};
+            return {
+                token: null,
+                user: [],
+                loading: true,
+                err: null
+            };
             case 'AUTH_SET_USER':
             return {
                 ...state.authData,
