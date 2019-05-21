@@ -3,12 +3,6 @@ import React, { Component }  from 'react';
 
 export default class TripForm extends Component {
   
-    componentWillReceiveProps(nextProps) {
-      if (nextProps.items !== this.props.items) {
-        this.setInputValue(nextProps.items)
-      }
-    }
-  
     getInputValue() {
       return ( { ...this.props.items,
                  'title': this.refs.generalTitle.value,
@@ -16,20 +10,18 @@ export default class TripForm extends Component {
                 } )
     }
   
-    setInputValue(val) {
-      this.refs.generalId.value = val.id
-      this.refs.generalTitle.value = val.title
-      this.refs.generalDescription.value = val.description
-    }
-  
     handleSubmit(e){
-      e.preventDefault()
-      this.props.handleSubmit(this.getInputValue())
+        e.preventDefault()
+        this.props.handleSubmit(this.getInputValue())
+    }
+
+    removeTrip(e, id){
+        e.preventDefault()
+        this.props.removeTrip(id)
     }
   
     render() { 
        const { items } = this.props
-       console.log(items);
         return(
             <form onSubmit={ (e) => this.handleSubmit(e)}>
                 <fieldset>
@@ -82,6 +74,7 @@ export default class TripForm extends Component {
         if(id) {
             return (
                 <div className="form-group row">
+                <button type="button" className="btn btn-danger" onClick={(e) => this.removeTrip(e, id) }>Remove trip</button>
                 <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Trip id</label>
                 <div className="col-sm-10">
                     <input ref="generalId" type="text" readOnly className="form-control-plaintext" id="tripId" defaultValue={id} />

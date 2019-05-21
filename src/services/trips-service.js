@@ -55,6 +55,10 @@ export default class TripsService {
        
     }
 
+    removeTrip(id) {
+        return database.ref('/trips').child(id).remove();
+    }
+
     mapInstItemsToTrip(items, userId) {
        return {
             id: '',

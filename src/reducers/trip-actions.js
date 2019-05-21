@@ -20,8 +20,10 @@ const tripActions = (state, action) => {
             return {
                 ...state.tripData,
                 err: action.payload
-            }
-           
+            };
+            case 'REMOVE_TRIP':
+            return {};
+
             default: 
                 return state.tripData;
     }

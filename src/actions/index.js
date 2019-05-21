@@ -1,6 +1,6 @@
-import { fetchTrips, createTrip, saveTrip } from './trips-actions';
+import { fetchTrips, createTrip, saveTrip, removeTrip } from './trips-actions';
 import { fetchInstItems, authInstUser } from './instagram-actions';
 
 export {
-    fetchTrips, fetchInstItems, authInstUser, createTrip, saveTrip
+    fetchTrips, fetchInstItems, authInstUser, createTrip, saveTrip, removeTrip
 };

@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { withTripsService } from '../hoc/with-trips-service';
 import { compose } from '../../utils/compose';
 import ErrorIndicator from '../error-indicator/error-indicator';
-import { saveTrip } from '../../actions';
+import { saveTrip, removeTrip } from '../../actions';
 
 import TripForm from './create-trip-from';
 
@@ -12,9 +12,11 @@ class CreateTripContainer extends Component {
 
     render() {
         const { trip } = this.props;
-        if (trip) {  return <TripForm items={ trip } handleSubmit={ (tripData) => this.props.saveTrip(tripData) } />  }
-        else { return <ErrorIndicator /> }
-       
+        if (trip) {  
+            return <TripForm items={ trip } 
+                             handleSubmit={ (tripData) => this.props.saveTrip(tripData) }
+                             removeTrip={ (id) => this.props.removeTrip(id) } />  }
+        else { return <ErrorIndicator /> }  
     }
 
 }
@@ -26,7 +28,8 @@ const mapStateToProps = ( { tripData : { trip } } ) => {
 const mapDispatchToProps = (dispatch, { tripsService }) =>
 {
    return  bindActionCreators (
-         { saveTrip: (tripData) => dispatch(saveTrip(tripData, tripsService)) },
+         { saveTrip: (tripData) => dispatch(saveTrip(tripData, tripsService)),
+           removeTrip: (id) => dispatch(removeTrip(id, tripsService)) },
          dispatch); 
  };
 

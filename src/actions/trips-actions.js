@@ -21,4 +21,10 @@ const saveTrip = (tripData, tripService) => () => (dispatch) => {
     .catch((err) => dispatch(itemsError('SAVE_TRIP_FAILURE',err)) );
 }
 
-export { fetchTrips, createTrip, saveTrip };
+const removeTrip = (id, tripService) => () => (dispatch) => {
+    tripService.removeTrip(id)
+    .then(() => dispatch(itemsRequested('REMOVE_TRIP')))
+    .catch((err) => dispatch(itemsError('FETCH_TRIPS_FAILURE',err)))
+}
+
+export { fetchTrips, createTrip, saveTrip, removeTrip };
