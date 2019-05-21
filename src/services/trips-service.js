@@ -55,6 +55,10 @@ export default class TripsService {
        
     }
 
+    getTripById(tripId) {
+        return database.ref('/trips/' + tripId).once('value');
+    }
+
     removeTrip(id) {
         return database.ref('/trips').child(id).remove();
     }

@@ -27,4 +27,11 @@ const removeTrip = (id, tripService) => () => (dispatch) => {
     .catch((err) => dispatch(itemsError('FETCH_TRIPS_FAILURE',err)))
 }
 
-export { fetchTrips, createTrip, saveTrip, removeTrip };
+const getTripById = (id, tripService) => () => (dispatch) => {
+    dispatch(itemsRequested('FETCH_TRIP_REQUEST'));
+    tripService.getTripById(id)
+    .then((result) => { if (result.exists()) { return dispatch(itemsLoaded('FETCH_TRIP_SUCCESS', result.val()))} }) 
+    .catch((err) => dispatch(itemsError('FETCH_TRIP_FAILURE', err)))
+}
+
+export { fetchTrips, createTrip, saveTrip, removeTrip, getTripById };

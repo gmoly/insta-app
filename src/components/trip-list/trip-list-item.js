@@ -1,12 +1,13 @@
 import React, { Fragment } from 'react';
 
 const TripListItem = ({ trip }) => {
-    const { title, description } = trip;
+    console.log('trip');
+    console.log(trip);
 
     return(
         <Fragment>
-            <span>{title}</span>
-            <span>{description}</span>
+            <span>{trip.title}</span>
+            <span>{trip.description}</span>
         </Fragment>
     );
 }
