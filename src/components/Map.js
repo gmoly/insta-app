@@ -23,7 +23,8 @@ class Map extends React.Component {
       <LeafletMap
         center={[50, 10]}
         zoom={6}
-        maxZoom={10}
+        minZoom={2}
+        maxZoom={17}
         attributionControl={true}
         zoomControl={true}
         doubleClickZoom={true}
@@ -33,7 +34,7 @@ class Map extends React.Component {
         easeLinearity={0.35}
       >
         <TileLayer
-          url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+          url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
         />
       </LeafletMap>
     );
