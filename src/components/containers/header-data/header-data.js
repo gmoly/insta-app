@@ -1,7 +1,7 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { signOutInstUser } from '../../actions';
+import { signOutInstUser } from '../../../actions';
 
     var instagramAuthPath = "https://api.instagram.com/oauth/authorize/?response_type=token"
     var clientId = "&client_id=8b7246cc912a4f5c8cde33ecbabeab30"

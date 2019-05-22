@@ -1,5 +1,5 @@
 import React from 'react';
-import TripInfo from '../trip-info/trip-info'
+import TripInfo from '../containers/trip-info/trip-info'
 
 const TripPage = ({ match }) => {
    return (

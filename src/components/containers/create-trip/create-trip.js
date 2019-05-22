@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { withTripsService } from '../hoc/with-trips-service';
-import { compose } from '../../utils/compose';
-import ErrorIndicator from '../error-indicator/error-indicator';
-import { saveTrip, removeTrip } from '../../actions';
+import { withTripsService } from '../../hoc/with-trips-service';
+import { compose } from '../../../utils/compose';
+import ErrorIndicator from '../../error-indicator/error-indicator';
+import { saveTrip, removeTrip } from '../../../actions';
 
 import TripForm from './create-trip-from';
 

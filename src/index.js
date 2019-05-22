@@ -4,17 +4,17 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react'
 
-//import App from './App';
-
 import App from './components/app/app'
 import ErrorBoundry from './components/error-boundry/error-boundry';
 import TripsService from './services/trips-service';
-import { TripsServiceProvider } from './components/trips-service-context/trips-service-context'
+import InstagramService from './services/instagram-service';
+import { TripsServiceProvider, InstagramServiceProvider } from './components/app-service-context/app-service-context'
 import { store } from './store';
 import { persistor } from './store';
 
 
 const tripsService = new TripsService();
+const instagramService = new InstagramService();
 
 
 
@@ -23,9 +23,11 @@ const application = (
         <PersistGate loading={null} persistor={persistor}>
             <ErrorBoundry>
                 <TripsServiceProvider value={tripsService}>
-                    <BrowserRouter>
-                        <App />
-                    </BrowserRouter>
+                    <InstagramServiceProvider value={instagramService}>
+                        <BrowserRouter>
+                            <App />
+                        </BrowserRouter>
+                    </InstagramServiceProvider>
                 </TripsServiceProvider>
             </ErrorBoundry>
         </PersistGate>

@@ -11,8 +11,7 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, reducer)
 
-const store = createStore(persistedReducer, applyMiddleware
-    (thunkMiddleware));
+const store = createStore(persistedReducer, applyMiddleware(thunkMiddleware));
 
 const persistor = persistStore(store);
 

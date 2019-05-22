@@ -1,7 +1,4 @@
-import InstagramService from './instagram-service';
 import { database } from './firebase-service';
-
-const instagramService = new InstagramService();
 
 export default class TripsService {
 
@@ -33,14 +30,6 @@ export default class TripsService {
               // reject(new Error('Issue!!!'))
             }, 1000);
         });
-    }
-
-    getProfileItems(token) {
-       return instagramService.getProfileItems(token);
-    }
-
-    getProfileInfo(token) {
-        return instagramService.getProfileInfo(token);
     }
 
     saveTrip(tripData) {

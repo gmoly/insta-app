@@ -1,5 +1,5 @@
 import React from 'react';
-import UserData  from '../user-data/user-data';
+import UserData  from '../containers/user-data/user-data';
 
 const UserDataPage = ({ location }) => {
    return (

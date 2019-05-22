@@ -1,6 +1,6 @@
 import React from 'react';
 
-import HeaderDataContainer from '../header-data/header-data'
+import HeaderDataContainer from '../containers/header-data/header-data'
 
 const Header = () => {
    return ( 

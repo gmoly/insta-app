@@ -28,16 +28,16 @@ function authSetToken(token) {
   }
   
 
-const fetchInstItems = (tripsService, token) => () => (dispatch) => {
+const fetchInstItems = (instagramService, token) => () => (dispatch) => {
     dispatch(itemsRequested('FETCH_INST_ITEMS_REQUEST'));
-    tripsService.getProfileItems(token)
+    instagramService.getProfileItems(token)
     .then((data) => dispatch(itemsLoaded('FETCH_INST_ITEMS_SUCCESS',data)))
     .catch((err) => dispatch(itemsError('FETCH_INST_ITEMS_FAILURE',err)));
 }
 
-const authInstUser = (tripsService, token) => () => (dispatch) => {
+const authInstUser = (instagramService, token) => () => (dispatch) => {
     dispatch(authSetToken(token));
-    tripsService.getProfileInfo(token)
+    instagramService.getProfileInfo(token)
     .then((data) => dispatch(authSetUser(data)))
     .catch((err) => dispatch(authError(err)));
 }

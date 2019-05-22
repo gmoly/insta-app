@@ -1,5 +1,5 @@
 import React from 'react';
-import { TripsServiceConsumer } from '../trips-service-context/trips-service-context';
+import { TripsServiceConsumer } from '../app-service-context/app-service-context';
 
 const withTripsService = () => (Wrapped) => {
     
