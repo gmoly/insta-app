@@ -1,0 +1,28 @@
+html,body{
+    height:100%;
+}
+
+.trip-container {
+    position: fixed;
+}
+
+
+#main, #main>.row {
+  height:100%;
+}
+
+#left {
+  height:100%;
+  width: 66.5%;
+  overflow-y:scroll;
+}
+
+#map-canvas {
+  width:33.4%;
+  height:100%;
+  position:absolute;
+  right:0;
+  top:0;
+  bottom:0;
+}
+
