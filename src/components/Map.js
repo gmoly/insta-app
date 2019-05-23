@@ -5,7 +5,38 @@ import {  iconInstagram  } from './containers/maps/icon';
 import './Map.css'
 
 class Map extends React.Component {
+
   render() {
+    var { flag } = this.props;
+    console.log(flag);
+    var marker = [1].map(e => {
+      if (flag) {
+      return(
+      <Marker
+            onadd={ (e) => e.target.openPopup() }
+            onmouseover={(e) => e.target.openPopup() }
+            onmouseout={(e) => e.target.closePopup() }
+            position={[51.5, -0.09]} 
+            icon= {iconInstagram('5')}>
+            <Popup>
+               { 'TEST DESCRIPTION 1' }
+            </Popup>
+      </Marker>
+      );
+    } else {
+      return(
+        <Marker
+              onmouseover={(e) => e.target.openPopup() }
+              onmouseout={(e) => e.target.closePopup() }
+              position={[51.5, -0.09]} 
+              icon= {iconInstagram('5')}>
+              <Popup>
+                 { 'TEST DESCRIPTION 1' }
+              </Popup>
+        </Marker>
+        );
+    }
+    })
 
     /*var mapMarker = this.props.items.map( element => {
         if (element.location) {
@@ -38,13 +69,16 @@ class Map extends React.Component {
           url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
         />
 
+      { marker }
       <Marker 
-            position={[51.5, -0.09]} 
-            icon= {iconInstagram('5')}>
+            onmouseover={(e) => e.target.openPopup() }
+            onmouseout={(e) => e.target.closePopup() }
+            position={[54.5, -0.0]} 
+            icon= {iconInstagram('7')}>
             <Popup>
-               { 'TEST DESCRIPTION' }
+               { 'TEST DESCRIPTION 2' }
             </Popup>
-      </Marker> 
+      </Marker>  
 
       </LeafletMap>
     );

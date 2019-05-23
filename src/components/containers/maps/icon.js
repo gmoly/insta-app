@@ -6,6 +6,6 @@ const iconInstagram = (number) => new L.divIcon({
     shadowSize: [55, 55],
     className: "number-icon",
     html: number
-}); 
+});
 
 export { iconInstagram };
