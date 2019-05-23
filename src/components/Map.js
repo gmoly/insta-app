@@ -1,5 +1,6 @@
 import React from 'react'
 import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
+import {  iconInstagram  } from './containers/maps/icon';
 
 import './Map.css'
 
@@ -36,6 +37,15 @@ class Map extends React.Component {
         <TileLayer
           url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
         />
+
+      <Marker 
+            position={[51.5, -0.09]} 
+            icon= {iconInstagram('5')}>
+            <Popup>
+               { 'TEST DESCRIPTION' }
+            </Popup>
+      </Marker> 
+
       </LeafletMap>
     );
   }
