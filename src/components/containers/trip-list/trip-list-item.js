@@ -10,16 +10,20 @@ export default class TripListItem extends Component {
         id: null
     }
 
-        changeState(id) {
+        changeStateAdd(id) {
+            if(this.state.id !== id) {
+                this.setState({
+                    id: id
+                })
+            } 
+        }
+
+        changeStateRemove(id) {
             if(this.state.id && this.state.id === id) {
                 this.setState({
                     id: null
                 })
-            } else {
-                this.setState({
-                    id: id
-                })
-            }
+            } 
         }
 
         render() {
@@ -41,7 +45,7 @@ export default class TripListItem extends Component {
                             <hr />
                             <div className="places-block">
                                 { trip.places.map(( (place, i) => { return ( 
-                                    <div onMouseOver={() => {this.changeState({i})}} onMouseOut={() => {this.changeState({i})}}>
+                                    <div onMouseOver={() => {this.changeStateAdd({i})}} onMouseOut={() => {this.changeStateRemove({i})}}>
                                         <TripPlace place={place}/>
                                     </div>
                              ); } ))}
