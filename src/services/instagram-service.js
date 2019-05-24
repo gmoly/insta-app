@@ -1,7 +1,7 @@
 export default class InstagramService {
 
-    _apiBase = 'https://api.instagram.com/v1/users/self';
-    _tokenParam='?access_token=';
+    _apiBase = process.env.REACT_APP_API_BASE;
+    _tokenParam=process.env.REACT_APP_TOKEN_PARAM;
   
     getResource = async (url, token) => {
       const res = await fetch(`${this._apiBase}${url}${this._tokenParam}${token}`);

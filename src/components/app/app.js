@@ -9,6 +9,8 @@ import { Header } from '../pages/header';
 
 import './app.css';
 
+require('dotenv').config();
+
 const App = () => {
     return (
         <Fragment>

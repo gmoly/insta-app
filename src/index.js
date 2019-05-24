@@ -12,11 +12,8 @@ import { TripsServiceProvider, InstagramServiceProvider } from './components/app
 import { store } from './store';
 import { persistor } from './store';
 
-
 const tripsService = new TripsService();
 const instagramService = new InstagramService();
-
-
 
 const application = (
     <Provider store={store}>
