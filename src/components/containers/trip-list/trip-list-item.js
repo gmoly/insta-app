@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
 import Map from '../../Map';
+import TripPlace from './trip-place';
+
 import './trip-list-item.scss'
 
 export default class TripListItem extends Component {
 
     state = {
-        flag: false
+        id: null
     }
 
-        changeState() {
-            this.setState({
-                flag: !this.state.flag
-            })
+        changeState(id) {
+            if(this.state.id && this.state.id === id) {
+                this.setState({
+                    id: null
+                })
+            } else {
+                this.setState({
+                    id: id
+                })
+            }
         }
 
         render() {
@@ -20,60 +28,25 @@ export default class TripListItem extends Component {
 
             return(
                 <div className="trip-container">
-                    <div id="map-canvas"><Map flag={ this.state.flag }/></div>  
+                    <div id="map-canvas">
+                            <Map places={ trip.places } markerId={ this.state.id }/>
+                    </div>  
                     <div className="container-fluid" id="main">
                         <div className="row">
                             <div className="col-xs-8" id="left">
                             
-                            <h2>Bootstrap Google Maps Demo</h2>
-                            <div className="panel panel-default">
-                                <div className="panel-heading"><a href="">Item heading</a></div>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-                                Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-                                dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-                                Aliquam in felis sit amet augue.</p>
+                            <h2>{ trip.title }</h2>
+                            <p>{ trip.description }</p>
                             
                             <hr />
-                            
-                            <div className="panel panel-default">
-                                <div className="panel-heading"><a href="">Item heading</a></div>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-                                Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-                                dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-                                Aliquam in felis sit amet augue.</p>
-                            
-                            <hr />
-                            
-                            <div className="panel panel-default">
-                                <div className="panel-heading"><a href="">Item heading</a></div>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-                                Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-                                dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-                                Aliquam in felis sit amet augue.</p>
-                            
-                            <hr />
-                            
-                            <div className="panel panel-default">
-                                <div className="panel-heading"><a href="">Item heading</a></div>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-                                Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-                                dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-                                Aliquam in felis sit amet augue.</p>
-                            
-                            <hr />
-                            
+                            <div className="places-block">
+                                { trip.places.map(( (place, i) => { return ( 
+                                    <div onMouseOver={() => {this.changeState({i})}} onMouseOut={() => {this.changeState({i})}}>
+                                        <TripPlace place={place}/>
+                                    </div>
+                             ); } ))}
+                            </div> 
                             <p>
-                            <a href="http://www.bootply.com/render/129229">Demo</a> | <a href="http://bootply.com/129229">Source Code</a>
-                            </p>
-                            
-                            <hr /> 
-                                
-                            <p>
-                            <button onClick={() => {this.changeState()}} target="_ext" className="center-block btn btn-primary">More Bootstrap Snippets on Bootply</button>
                             </p>
                                 
                             <hr />      

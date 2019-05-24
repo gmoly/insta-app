@@ -2,27 +2,28 @@ html,body{
     height:100%;
 }
 
-.trip-container {
-    position: fixed;
+#main, #main>.row {
+  height:90%;
 }
 
-
-#main, #main>.row {
-  height:100%;
+.places-block {
+  position: relative;
+  width: 400px;
 }
 
 #left {
-  height:100%;
+  height:90%;
   width: 66.5%;
   overflow-y:scroll;
+  position: fixed;
 }
 
 #map-canvas {
   width:33.4%;
-  height:100%;
-  position:absolute;
+  height:90%;
+  position:fixed;
   right:0;
-  top:0;
+  top:56px;
   bottom:0;
 }
 

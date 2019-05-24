@@ -7,40 +7,38 @@ import './Map.css'
 class Map extends React.Component {
 
   render() {
-    var { flag } = this.props;
-    var marker = [1].map((e) => {
-      return(
-      <Marker
-            ref="marker_0"
-            onmouseover={(e) => e.target.openPopup() }
-            onmouseout={(e) => e.target.closePopup() }
-            position={[51.5, -0.09]} 
-            icon= {iconInstagram('5')}>
-            <Popup>
-               { 'TEST DESCRIPTION 1' }
-            </Popup>
-      </Marker>
-      );
-    })
-
-    if(this.refs.marker_0 && flag) {
-      console.log(this.refs.marker_0.leafletElement.openPopup());
-    }
-   // marker[0].openPopup();
-   
-
-    /*var mapMarker = this.props.items.map( element => {
+    var { markerId, places } = this.props;
+    console.log(markerId);
+    var mapMarkers = places.map( (element, i) => {
         if (element.location) {
             var geoPosition = [element.location.latitude, element.location.longitude];
             return (
-            <Marker position={geoPosition} key={element.id}>
+            <Marker
+              ref={ "marker_" + {i} }
+              onmouseover={(e) => e.target.openPopup() }
+              onmouseout={(e) => e.target.closePopup() }
+              position={geoPosition}
+              icon= {iconInstagram({i}+1)}>
+              key={element.id}>
             <Popup>
-                {element.description}
+                {element.placeDescription}
             </Popup>
             </Marker> 
             ); 
         }
-    });*/
+    });
+
+    if (markerId && this.refs['marker_' + markerId]){
+      this.refs['marker_' + markerId].leafletElement.openPopup();
+    }
+
+    if(markerId === null) {
+      mapMarkers.forEach((element, i) => {
+        if (this.refs['marker_' + i]) {
+          this.refs['marker_' + i].leafletElement.closePopup();
+        }
+      });
+    }
 
     return (
       <LeafletMap
@@ -56,45 +54,11 @@ class Map extends React.Component {
         animate={true}
         easeLinearity={0.35}
       >
-        <TileLayer
-          url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-        />
-
-      { marker }
-      <Marker 
-            onmouseover={(e) => e.target.openPopup() }
-            onmouseout={(e) => e.target.closePopup() }
-            position={[54.5, -0.0]} 
-            icon= {iconInstagram('7')}>
-            <Popup>
-               { 'TEST DESCRIPTION 2' }
-            </Popup>
-      </Marker>  
-
+        <TileLayer  url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
+        { mapMarkers }
       </LeafletMap>
     );
   }
 }
-
-/**
-<LeafletMap
-        center={[50, 10]}
-        zoom={6}
-        maxZoom={10}
-        attributionControl={true}
-        zoomControl={true}
-        doubleClickZoom={true}
-        scrollWheelZoom={true}
-        dragging={true}
-        animate={true}
-        easeLinearity={0.35}
-      >
-        <TileLayer
-          url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-        />
-       { mapMarker }
-      </LeafletMap> 
-
- */
 
 export default Map
