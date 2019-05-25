@@ -7,7 +7,7 @@ import './trip-list-item.scss'
 export default class TripListItem extends Component {
 
     state = {
-        id: null
+        id: 0
     }
 
         changeStateAdd(id) {
@@ -19,9 +19,9 @@ export default class TripListItem extends Component {
         }
 
         changeStateRemove(id) {
-            if(this.state.id && this.state.id === id) {
+            if(this.state.id === id) {
                 this.setState({
-                    id: null
+                    id: 0
                 })
             } 
         }
@@ -29,7 +29,6 @@ export default class TripListItem extends Component {
         render() {
          
             var { trip } = this.props;
-
             return(
                 <div className="trip-container">
                     <div id="map-canvas">
@@ -45,7 +44,7 @@ export default class TripListItem extends Component {
                             <hr />
                             <div className="places-block">
                                 { trip.places.map(( (place, i) => { return ( 
-                                    <div onMouseOver={() => {this.changeStateAdd({i})}} onMouseOut={() => {this.changeStateRemove({i})}}>
+                                    <div key={i+1} onMouseEnter={() => {this.changeStateAdd(i+1)}} onMouseLeave={() => {this.changeStateRemove(i+1)}}>
                                         <TripPlace place={place}/>
                                     </div>
                              ); } ))}

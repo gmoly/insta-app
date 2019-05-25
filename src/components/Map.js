@@ -8,18 +8,17 @@ class Map extends React.Component {
 
   render() {
     var { markerId, places } = this.props;
-    console.log(markerId);
     var mapMarkers = places.map( (element, i) => {
         if (element.location) {
             var geoPosition = [element.location.latitude, element.location.longitude];
             return (
             <Marker
-              ref={ "marker_" + {i} }
+              ref={ "marker_" + (i+1) }
               onmouseover={(e) => e.target.openPopup() }
               onmouseout={(e) => e.target.closePopup() }
               position={geoPosition}
-              icon= {iconInstagram({i}+1)}>
-              key={element.id}>
+              icon= {iconInstagram(i+1)}
+              key={i+1} >
             <Popup>
                 {element.placeDescription}
             </Popup>
@@ -32,10 +31,10 @@ class Map extends React.Component {
       this.refs['marker_' + markerId].leafletElement.openPopup();
     }
 
-    if(markerId === null) {
+    if(markerId === 0) {
       mapMarkers.forEach((element, i) => {
-        if (this.refs['marker_' + i]) {
-          this.refs['marker_' + i].leafletElement.closePopup();
+        if (this.refs['marker_' + (i+1)]) {
+          this.refs['marker_' + (i+1)].leafletElement.closePopup();
         }
       });
     }
