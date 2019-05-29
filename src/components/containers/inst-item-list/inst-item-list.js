@@ -13,7 +13,6 @@ import ImagePicker from '../../images/ImagePicker';
 import  { Redirect } from 'react-router-dom'
 
 const InstItemList = ({ items, createTrip, userId }) => {
-    var imageList = items.map( element => { return element.images.thumbnail.url } )
     return (
         <ImagePicker 
         images={items.map((item, i) => ({src: item.images.thumbnail.url, value: i, object: item}))}

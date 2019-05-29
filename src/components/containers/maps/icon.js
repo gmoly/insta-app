@@ -2,8 +2,8 @@ import L from 'leaflet';
 import './icon.css'
 
 const iconInstagram = (number) => new L.divIcon({
-    iconSize: new L.Point(50, 50),
-    shadowSize: [55, 55],
+    iconSize: new L.Point(25, 25),
+    shadowSize: [20, 20],
     className: "number-icon",
     html: number
 });

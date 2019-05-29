@@ -6,7 +6,7 @@ import { compose } from '../../../utils/compose';
 import ErrorIndicator from '../../error-indicator/error-indicator';
 import { saveTrip, removeTrip } from '../../../actions';
 
-import TripForm from './create-trip-from';
+import TripForm from './create-trip-form';
 
 class CreateTripContainer extends Component {
 

@@ -1,8 +1,9 @@
 import React from 'react';
+import { withRouter } from "react-router";
 
 import HeaderDataContainer from '../containers/header-data/header-data'
 
-const Header = () => {
+const Header = ({ location }) => {
    return ( 
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <a className="navbar-brand" href="/">Together</a>
@@ -12,11 +13,11 @@ const Header = () => {
     
         <div className="collapse navbar-collapse" id="navbarColor01">
         <ul className="navbar-nav mr-auto">
-            <li className="nav-item active">
+            <li className={ checkIsActive("/", location) }>
             <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
             </li>
-            <li className="nav-item">
-            <a className="nav-link" href="#">Features</a>
+            <li className={ checkIsActive("/new-trip", location) }>
+            <a className="nav-link" href="/new-trip">Create Trip</a>
             </li>
         </ul>
             <HeaderDataContainer />
@@ -25,4 +26,12 @@ const Header = () => {
    );
 };
 
-export { Header };
+var checkIsActive = (href, location) => {
+    console.log(location)
+    if (location.pathname === href) {
+        return 'nav-item active'
+    }
+    return 'nav-item'
+}
+
+export default withRouter(Header);

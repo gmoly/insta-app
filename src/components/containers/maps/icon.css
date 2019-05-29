@@ -1,8 +1,9 @@
 .number-icon
 {
-    background-image: url("https://ionicons.com/ionicons/svg/logo-instagram.svg");
+    background-image: url("https://ionicons.com/ionicons/svg/md-paper-plane.svg");
     text-align:center;
-    padding-top: 16px;
+    padding-top: 10px;
+    padding-left: 20px;
     font-weight: bold;
-    color: black;    
+    color: black;
 }

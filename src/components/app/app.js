@@ -5,7 +5,7 @@ import { NewTripPage } from '../pages/new-trip-page';
 import { TripPage } from '../pages/trip-page';
 import { UserDataPage } from '../pages/user-data-page';
 import { ContentsPage } from '../pages/contents-page';
-import { Header } from '../pages/header';
+import Header from '../pages/header';
 
 import './app.css';
 
