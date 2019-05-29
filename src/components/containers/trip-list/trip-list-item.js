@@ -5,6 +5,11 @@ import TripPlace from './trip-place';
 import './trip-list-item.scss'
 
 export default class TripListItem extends Component {
+    constructor(props) {
+        super(props);
+        this.myRefs = [];
+        this.props.trip.places.map((e,i) => this.myRefs.push(React.createRef()))
+      }
 
     state = {
         id: 0
@@ -26,13 +31,17 @@ export default class TripListItem extends Component {
             } 
         }
 
+        scrollToRef = (refId) => {
+            this.myRefs[refId].current.scrollIntoView();
+          };
+
         render() {
          
             var { trip } = this.props;
             return(
                 <div className="trip-container">
                     <div id="map-canvas">
-                            <Map places={ trip.places } markerId={ this.state.id }/>
+                            <Map places={ trip.places } markerId={ this.state.id } scrollToRef={ this.scrollToRef } />
                     </div>  
                     <div className="container-fluid" id="main">
                         <div className="row">
@@ -44,7 +53,7 @@ export default class TripListItem extends Component {
                             <hr />
                             <div className="places-block">
                                 { trip.places.map(( (place, i) => { return ( 
-                                    <div key={i+1} onMouseEnter={() => {this.changeStateAdd(i+1)}} onMouseLeave={() => {this.changeStateRemove(i+1)}}>
+                                    <div ref={ this.myRefs[i] } key={i+1} onMouseEnter={() => {this.changeStateAdd(i+1)}} onMouseLeave={() => {this.changeStateRemove(i+1)}}>
                                         <TripPlace place={place}/>
                                     </div>
                              ); } ))}

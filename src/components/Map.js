@@ -5,16 +5,36 @@ import {  iconInstagram  } from './containers/maps/icon';
 import './Map.css'
 
 class Map extends React.Component {
+  constructor(props) {
+    super(props);
+    this.myRefs = [];
+    this.props.places.map((e,i) => this.myRefs.push(React.createRef()))
+  }
+
+  componentDidUpdate() {
+    var { markerId, places } = this.props;
+    if (markerId > 0 && this.myRefs[markerId-1]){
+      this.myRefs[markerId-1].current.leafletElement.openPopup();
+    }
+
+    if(markerId === 0) {
+      places.forEach((element, i) => {
+        if (this.myRefs[i].current) {
+          this.myRefs[i].current.leafletElement.closePopup();
+        }
+      });
+    }
+  }
 
   render() {
-    var { markerId, places } = this.props;
+    var { places, scrollToRef } = this.props;
     var mapMarkers = places.map( (element, i) => {
         if (element.location) {
             var geoPosition = [element.location.latitude, element.location.longitude];
             return (
             <Marker
-              ref={ "marker_" + (i+1) }
-              onmouseover={(e) => e.target.openPopup() }
+              ref={ this.myRefs[i] }
+              onmouseover={(e) => { scrollToRef(i); e.target.openPopup() } }
               onmouseout={(e) => e.target.closePopup() }
               position={geoPosition}
               icon= {iconInstagram(i+1)}
@@ -26,18 +46,6 @@ class Map extends React.Component {
             ); 
         }
     });
-
-    if (markerId && this.refs['marker_' + markerId]){
-      this.refs['marker_' + markerId].leafletElement.openPopup();
-    }
-
-    if(markerId === 0) {
-      mapMarkers.forEach((element, i) => {
-        if (this.refs['marker_' + (i+1)]) {
-          this.refs['marker_' + (i+1)].leafletElement.closePopup();
-        }
-      });
-    }
 
     return (
       <LeafletMap
