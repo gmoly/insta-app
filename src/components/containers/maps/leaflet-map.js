@@ -1,14 +1,14 @@
 import React from 'react'
 import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
-import {  iconInstagram  } from './containers/maps/icon';
+import {  iconInstagram  } from './icon';
 
-import './Map.css'
+import './leaflet-map.css'
 
 class Map extends React.Component {
   constructor(props) {
     super(props);
     this.myRefs = [];
-    this.props.places.map((e,i) => this.myRefs.push(React.createRef()))
+    this.props.places.map(() => this.myRefs.push(React.createRef()))
   }
 
   componentDidUpdate() {

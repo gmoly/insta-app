@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Map from '../../Map';
+import Map from '../maps/leaflet-map';
 import TripPlace from './trip-place';
 
 import './trip-list-item.scss'
@@ -8,7 +8,7 @@ export default class TripListItem extends Component {
     constructor(props) {
         super(props);
         this.myRefs = [];
-        this.props.trip.places.map((e,i) => this.myRefs.push(React.createRef()))
+        this.props.trip.places.map(() => this.myRefs.push(React.createRef()))
       }
 
     state = {
