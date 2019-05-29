@@ -1,4 +1,8 @@
 import React, { Component }  from 'react';
+import { Map as LeafletMap,TileLayer,Marker } from 'react-leaflet';
+import {  iconInstagram  } from '../maps/icon';
+import '../maps/leaflet-map.css'
+import './create-trip-form.css'
 
 
 export default class TripForm extends Component {
@@ -19,6 +23,11 @@ export default class TripForm extends Component {
         e.preventDefault()
         this.props.removeTrip(id)
     }
+
+    handlePositionChanged = (e) => {
+        const { lat, lng } = e.latlng;
+        console.log(lat, lng);
+      }
   
     render() { 
        const { items } = this.props
@@ -66,6 +75,29 @@ export default class TripForm extends Component {
                 <label htmlFor="inputPlaceDescription1">Place description</label>
                 <textarea className="form-control" id="inputPlaceDescription" rows="6" defaultValue={place.placeDescription} />
             </div>
+            <div className="form-group map-canvas">
+                    <LeafletMap
+                        center={[place.location.latitude, place.location.longitude]}
+                        zoom={6}
+                        minZoom={2}
+                        maxZoom={17}
+                        attributionControl={true}
+                        zoomControl={true}
+                        doubleClickZoom={true}
+                        scrollWheelZoom={true}
+                        dragging={true}
+                        animate={true}
+                        easeLinearity={0.35} >
+                        <TileLayer  url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
+                        <Marker
+                            draggable={true}
+                            position={[place.location.latitude, place.location.longitude]}
+                            icon= {iconInstagram('')}
+                            onmouseout={(e) => this.handlePositionChanged(e) }
+                            />
+                    </LeafletMap>
+
+                </div>
             </React.Fragment>
         )
     }
