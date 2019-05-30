@@ -27,7 +27,6 @@ const Header = ({ location }) => {
 };
 
 var checkIsActive = (href, location) => {
-    console.log(location)
     if (location.pathname === href) {
         return 'nav-item active'
     }

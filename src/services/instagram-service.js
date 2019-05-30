@@ -37,7 +37,7 @@ export default class InstagramService {
           id: item.id,
           location: item.location,
           images: item.images,
-          carusel: item.carusel_media,
+          carousel: item.carousel_media,
           description: item.caption.text,
           creationTime: item.caption.creation_time
         };

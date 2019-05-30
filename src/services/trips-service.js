@@ -53,6 +53,7 @@ export default class TripsService {
     }
 
     mapInstItemsToTrip(items, userId) {
+        console.log(items)
        return {
             id: '',
             userId: userId,
@@ -62,7 +63,10 @@ export default class TripsService {
             places: items.map((item) => { return {
                     placeTitle: item.title,
                     placeDescription: item.description,
-                    media: item.images,
+                    media: {
+                        image: item.images,
+                        carousel: item.carousel
+                    },
                     location: item.location,
                     source: {
                         id: item.id,

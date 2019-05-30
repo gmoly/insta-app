@@ -1,6 +1,8 @@
 import React, { Component }  from 'react';
 import { Map as LeafletMap,TileLayer,Marker } from 'react-leaflet';
 import {  iconInstagram  } from '../maps/icon';
+import ImageCarousel from '../../images/image-carousel';
+
 import '../maps/leaflet-map.css'
 import './create-trip-form.css'
 
@@ -26,7 +28,6 @@ export default class TripForm extends Component {
 
     handlePositionChanged = (e) => {
         const { lat, lng } = e.latlng;
-        console.log(lat, lng);
       }
   
     render() { 
@@ -64,8 +65,8 @@ export default class TripForm extends Component {
     placeData(place){
         return (
             <React.Fragment>
-             <div className="form-group">
-                <img src={place.media.thumbnail.url} />
+             <div className="form-group carousel-container">
+                 <ImageCarousel media={ place.media } />
              </div>    
             <div className="form-group">
                 <label htmlFor="inputPlaceTitle1">Trip title</label>
