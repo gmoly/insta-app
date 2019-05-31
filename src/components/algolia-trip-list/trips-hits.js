@@ -1,26 +1,28 @@
 import { connectHits } from 'react-instantsearch-dom';
-import React from 'react';
+import React, { Fragment } from 'react';
 
 const Hits = ({ hits }) => (
-        <ol>
+        
+    <ul className="list-unstyled">
             {hits.map(hit => (
-            <li key={hit.objectID}>
+            <li className="media border-bottom border-primary rounded-bottom m-3" key={hit.objectID}>
                { trip(hit) }
             </li>
             ))}
-        </ol>
+    </ul>
 );
 
 const trip = (tripData) => (
-        <div className="jumbotron">
-            <h1 className="display-3">{tripData.title}</h1>
-            <p className="lead">{tripData.description}</p>
-            <hr className="my-4" />
-            <p><img src={tripData.places[0].media.thumbnail.url} /></p>
+    <Fragment>
+            <img className="m-3" src={tripData.places[0].media.thumbnail.url} />
+            <div className="media-body">
+            <h5 className="mt-0 mb-1"> {tripData.title} </h5>
+                {tripData.description}
             <p className="lead">
-                <a className="btn btn-primary btn-lg" href={"/trip/"+ tripData.objectID} role="button">Go to trip</a>
+                <a className="btn btn-primary btn-sm" href={"/trip/"+ tripData.objectID} role="button">Go to trip</a>
             </p>
-        </div>
+            </div>
+    </Fragment>      
 );
 
 export default connectHits(Hits);
