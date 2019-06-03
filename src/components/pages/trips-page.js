@@ -2,9 +2,9 @@ import React from 'react';
 /*import TripList from '../trip-list/trip-list';*/
 import AlgoliaTripList from '../algolia-trip-list/algolia-trip-list'
 
-const TripsPage = () => {
+const TripsPage = ({ location, history }) => {
    return (
-        <AlgoliaTripList />
+        <AlgoliaTripList location={ location }  history={ history } />
    );
 };
 
