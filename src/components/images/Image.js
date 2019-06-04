@@ -18,7 +18,7 @@ export default class Image extends Component {
         onClick={onImageClick}>
         <img src={src}
           className={`thumbnail${isSelected ? " selected" : ""}`}
-          style={ImageStyle(150, 150)}
+          style={ImageStyle(300, 180)}
         />
         <div className="checked">
           <div className="icon"/>

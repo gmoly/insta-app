@@ -1,5 +1,5 @@
 .image_picker {
-    width: 100%;
+    width: 80%;
   
     .responsive {
       position: relative;
@@ -11,9 +11,9 @@
         border: 1px solid #ddd; /* Gray border */
         border-radius: 4px;  /* Rounded border */
         padding: 5px; /* Some padding */
-        width: 150px; /* Set a small width */
+        width: 200px; /* Set a small width */
         opacity: 1;
-        margin: 0;
+        margin-left: 5%;
   
         &:hover {
           box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.7);
@@ -46,8 +46,8 @@
         .icon {
           background: url("https://www.orilissa.com/content/dam/orilissafullpat/icons/icon-pink-circle-checkmark-2x.png");
           background-size: cover;
-          height: 75px;
-          width: 75px;
+          height: 50px;
+          width: 50px;
         }
       }
     }
@@ -55,4 +55,9 @@
     .clear {
       clear: both;
     }
+
+  }
+
+  .card {
+    width: 350px;
   }

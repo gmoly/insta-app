@@ -17,7 +17,7 @@ const InstItemList = ({ loading, items, createTrip, userId, token, loadInstItems
     return (
         <Fragment>
             <ImagePicker 
-            images={items.map((item, i) => ({src: item.images.thumbnail.url, value: i, object: item}))}
+            images={items.map((item, i) => ({src: item.images.low_resolution.url, value: i, object: item}))}
             onPick={ (images)  => createTrip(images.map( element => { return element.src }), userId ) }
             multiple
             />
