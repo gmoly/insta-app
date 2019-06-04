@@ -11,13 +11,13 @@ const updateInstItemList = (state, action) => {
         switch (action.type) {
             case 'FETCH_INST_ITEMS_REQUEST':
             return {
-                items: [], 
+                ...state.instItemList,
                 loading: true,
                 error: null
             };
             case 'FETCH_INST_ITEMS_SUCCESS': 
             return {
-                items: action.payload,
+                items: [...state.instItemList.items, ...action.payload],
                 loading: false,
                 error: null
             };

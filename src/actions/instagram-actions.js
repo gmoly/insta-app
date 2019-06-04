@@ -28,9 +28,9 @@ function authSetToken(token) {
   }
   
 
-const fetchInstItems = (instagramService, token) => () => (dispatch) => {
+const fetchInstItems = (instagramService, token, last_id) => () => (dispatch) => {
     dispatch(itemsRequested('FETCH_INST_ITEMS_REQUEST'));
-    instagramService.getProfileItems(token)
+    instagramService.getProfileItems(token, last_id)
     .then((data) => dispatch(itemsLoaded('FETCH_INST_ITEMS_SUCCESS',data)))
     .catch((err) => dispatch(itemsError('FETCH_INST_ITEMS_FAILURE',err)));
 }

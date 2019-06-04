@@ -18,8 +18,12 @@ export default class InstagramService {
         return this._transformProfileInfo(info);
       };
 
-      getProfileItems = async (token) => {
-        const contents = await this.getResource(`/media/recent`,token);
+      getProfileItems = async (token, last_id) => {
+        var param = token + "&count=6" 
+        if (last_id !== null) {
+          param += "&max_id=" + last_id;
+        }
+        const contents = await this.getResource(`/media/recent`,param);
         return contents.data.map(this._transformProfileContents);
       };
 
