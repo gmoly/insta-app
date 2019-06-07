@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -10,25 +10,20 @@ import ErrorIndicator from '../../error-indicator/error-indicator';
 import  { Redirect } from 'react-router-dom'
 
 
-class UserDataContainer extends Component {
+function UserDataContainer({ hash, authUser, loading, error }) {
 
-    componentDidMount() {
-        var authToken = this.props.hash.substring(1).split('=')[1];
-        if (authToken) {
-            this.props.authUser(authToken);
-        }
-    }
-
-    render() {
-        const { loading, error } = this.props;
+        useEffect(() => {
+            var authToken = hash.substring(1).split('=')[1];
+            if (authToken) {
+                authUser(authToken);
+            }
+        });
 
         if (loading) { return <Spinner /> }
         
         if (error) { return <ErrorIndicator /> }
 
         return <Redirect to='/inst' />
-    }
-
 }
 
 

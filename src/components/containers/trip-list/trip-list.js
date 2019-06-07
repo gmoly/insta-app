@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import TripListItem from './trip-list-item';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -24,24 +24,16 @@ const TripList = ({ trips }) => {
 };
 
 
-class TripListContainer extends Component {
+function TripListContainer({ trips, loading, error, fetchTrips }) {
 
-    componentDidMount() {
-      this.props.fetchTrips();
-    }
-
-    render() {
-        const { trips, loading, error } = this.props;
+        useEffect(() => { fetchTrips() });
 
         if (loading) { return <Spinner /> }
         
         if (error) { return <ErrorIndicator /> }
 
         return <TripList trips={trips} />
-    }
-
 }
-
 
 const mapStateToProps = ( { tripList : { trips, loading, error } }) => {
     return { trips, loading, error };

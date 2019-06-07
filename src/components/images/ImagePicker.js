@@ -18,7 +18,7 @@ export default function ImagePicker({ multiple, onPick, images }) {
 
     function renderImage(image, i) {
       return (
-          <div className="card mx-5 my-3 ">
+          <div key={"image_"+i} className="card mx-5 my-3 ">
             <h3 className="card-header mb-3">Card header</h3>
             <Image 
               src={image.src}
@@ -29,8 +29,8 @@ export default function ImagePicker({ multiple, onPick, images }) {
             <div className="card-body">
               <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             </div>
-            <div class="card-footer text-muted">
-              <a href="#" class="card-link ">Card link</a>
+            <div className="card-footer text-muted">
+              <a href="#" className="card-link ">Card link</a>
             </div>
           </div>
       )

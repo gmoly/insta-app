@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { signOutInstUser } from '../../../actions';
@@ -7,17 +7,12 @@ import { signOutInstUser } from '../../../actions';
     var clientId = "&client_id=8b7246cc912a4f5c8cde33ecbabeab30"
     var redirectUrl = "&redirect_uri=http://localhost:3000/auth-instagram"
 
-class HeaderDataContainer extends Component {
-
-    render() {
-        const { token, signOut } = this.props;
+function HeaderDataContainer( {token, signOut }) {
         if(token) {
            return <button className="btn btn-secondary my-2 my-sm-0" onClick={() =>  signOut() }>Sign out</button>
         } else {
            return <a className="btn btn-secondary my-2 my-sm-0" href={instagramAuthPath + clientId + redirectUrl} role="button">Sign In</a>
         }
-    }
-
 }
 
 const mapStateToProps = ( { authData : { token } }) => {

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withTripsService } from '../../hoc/with-trips-service';
@@ -8,16 +8,13 @@ import { saveTrip, removeTrip } from '../../../actions';
 
 import TripForm from './create-trip-form';
 
-class CreateTripContainer extends Component {
+function CreateTripContainer({ trip, saveTrip, removeTrip }) {
 
-    render() {
-        const { trip } = this.props;
         if (trip) {  
             return <TripForm items={ trip } 
-                             handleSubmit={ (tripData) => this.props.saveTrip(tripData) }
-                             removeTrip={ (id) => this.props.removeTrip(id) } />  }
+                             handleSubmit={ (tripData) => saveTrip(tripData) }
+                             removeTrip={ (id) => removeTrip(id) } />  }
         else { return <ErrorIndicator /> }  
-    }
 
 }
 

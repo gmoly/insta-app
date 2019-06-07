@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withTripsService } from '../../hoc/with-trips-service';
@@ -9,18 +9,10 @@ import { getTripById } from '../../../actions';
 
 import TripListItem from '../trip-list/trip-list-item'; 
 
-class TripInfoContainer extends Component {
+function TripInfoContainer( { tripId, tripById, trip, loading, error } ) {
 
-    componentWillMount() {
-        this.props.tripById(this.props.tripId);
-    }
-
-    componentDidMount() {
-        this.props.tripById(this.props.tripId);
-      }
-  
-      render() {
-        const { trip, loading, error } = this.props;
+        useEffect(() => { tripById(tripId) });
+   
         if (loading) { return <Spinner /> }
         
         if (error) { return <ErrorIndicator /> }
@@ -30,7 +22,6 @@ class TripInfoContainer extends Component {
         } else {
             return  <ErrorIndicator />
         }
-      }
 }
   
   const mapStateToProps = ({ tripData : { trip, loading, error } }) => {
