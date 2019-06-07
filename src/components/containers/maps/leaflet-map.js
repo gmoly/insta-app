@@ -1,51 +1,50 @@
-import React from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
 import {  iconInstagram  } from './icon';
 
 import './leaflet-map.css'
 
-class Map extends React.Component {
-  constructor(props) {
-    super(props);
-    this.myRefs = [];
-    this.props.places.map(() => this.myRefs.push(React.createRef()))
-  }
+export default function Map( { markerId, places, scrollToRef }) {
+  const myRefs = [];
+  places.map(() => myRefs.push(useRef()));
 
-  componentDidUpdate() {
-    var { markerId, places } = this.props;
-    if (markerId > 0 && this.myRefs[markerId-1]){
-      this.myRefs[markerId-1].current.leafletElement.openPopup();
+  useEffect (
+    () => {
+    if (markerId > 0 && myRefs[markerId-1]){
+      myRefs[markerId-1].current.leafletElement.openPopup();
     }
-
+  
     if(markerId === 0) {
       places.forEach((element, i) => {
-        if (this.myRefs[i].current) {
-          this.myRefs[i].current.leafletElement.closePopup();
+        if (myRefs[i].current) {
+          myRefs[i].current.leafletElement.closePopup();
         }
       });
     }
   }
+  );
 
-  render() {
-    var { places, scrollToRef } = this.props;
-    var mapMarkers = places.map( (element, i) => {
-        if (element.location) {
-            var geoPosition = [element.location.latitude, element.location.longitude];
-            return (
-            <Marker
-              ref={ this.myRefs[i] }
-              onmouseover={(e) => { scrollToRef(i); e.target.openPopup() } }
-              onmouseout={(e) => e.target.closePopup() }
-              position={geoPosition}
-              icon= {iconInstagram(i+1)}
-              key={i+1} >
-            <Popup>
-                {element.placeDescription}
-            </Popup>
-            </Marker> 
-            ); 
-        }
-    });
+  function mapMarkers() {
+    console.log(places);
+    return places.map( (element, i) => {
+      if (element.location) {
+          var geoPosition = [element.location.latitude, element.location.longitude];
+          return (
+          <Marker
+            ref={ myRefs[i] }
+            onmouseover={(e) => { scrollToRef(i); e.target.openPopup() } }
+            onmouseout={(e) => e.target.closePopup() }
+            position={geoPosition}
+            icon= {iconInstagram(i+1)}
+            key={i+1} >
+          <Popup>
+              {element.placeDescription}
+          </Popup>
+          </Marker> 
+          ); 
+      }
+  });
+  }
 
     return (
       <LeafletMap
@@ -62,10 +61,7 @@ class Map extends React.Component {
         easeLinearity={0.35}
       >
         <TileLayer  url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
-        { mapMarkers }
+        { mapMarkers() }
       </LeafletMap>
     );
-  }
 }
-
-export default Map

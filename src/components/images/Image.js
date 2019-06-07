@@ -9,10 +9,13 @@ const ImageStyle = (width, height) => {
   }
 }
 
-export default class Image extends Component {
+Image.propTypes = {
+  src: PropTypes.string,
+  isSelected: PropTypes.bool
+}
 
-  render() {
-    const { src, isSelected, onImageClick } = this.props
+export default function Image({ src, isSelected, onImageClick }) {
+
     return (
       <div className={`responsive${isSelected ? " selected" : ""}`}
         onClick={onImageClick}>
@@ -26,9 +29,3 @@ export default class Image extends Component {
       </div>
     )
   }
-}
-
-Image.propTypes = {
-  src: PropTypes.string,
-  isSelected: PropTypes.bool
-}
