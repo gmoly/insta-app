@@ -1,47 +1,35 @@
-import React, { Component } from 'react';
+import React, { useState, useRef } from 'react';
 import Map from '../maps/leaflet-map';
 import TripPlace from './trip-place';
 
 import './trip-list-item.scss'
 
-export default class TripListItem extends Component {
-    constructor(props) {
-        super(props);
-        this.myRefs = [];
-        this.props.trip.places.map(() => this.myRefs.push(React.createRef()))
-      }
+export default function TripListItem( { trip } ) {
 
-    state = {
-        id: 0
-    }
+    const [id, useId] = useState(0);
+    const myRefs = [];
+    trip.places.map(() => myRefs.push(useRef()))
 
-        changeStateAdd(id) {
-            if(this.state.id !== id) {
-                this.setState({
-                    id: id
-                })
+        function changeStateAdd(newId) {
+            if(id !== newId) {
+               useId(newId)
             } 
         }
 
-        changeStateRemove(id) {
-            if(this.state.id === id) {
-                this.setState({
-                    id: 0
-                })
+        function changeStateRemove(oldId) {
+            if(id === oldId) {
+               useId(oldId)
             } 
         }
 
-        scrollToRef = (refId) => {
-            this.myRefs[refId].current.scrollIntoView();
+        function scrollToRef(refId) {
+            myRefs[refId].current.scrollIntoView();
           };
-
-        render() {
-         
-            var { trip } = this.props;
+            
             return(
                 <div className="trip-container">
                     <div id="map-canvas">
-                            <Map places={ trip.places } markerId={ this.state.id } scrollToRef={ this.scrollToRef } />
+                            <Map places={ trip.places } markerId= { id } scrollToRef={ scrollToRef } />
                     </div>  
                     <div className="container-fluid" id="main">
                         <div className="row">
@@ -53,7 +41,7 @@ export default class TripListItem extends Component {
                             <hr />
                             <div className="places-block">
                                 { trip.places.map(( (place, i) => { return ( 
-                                    <div ref={ this.myRefs[i] } key={i+1} onMouseEnter={() => {this.changeStateAdd(i+1)}} onMouseLeave={() => {this.changeStateRemove(i+1)}}>
+                                    <div ref={ myRefs[i] } key={i+1} onMouseEnter={() => {changeStateAdd(i+1)}} onMouseLeave={() => {changeStateRemove(i+1)}}>
                                         <TripPlace place={place}/>
                                     </div>
                              ); } ))}
@@ -70,5 +58,3 @@ export default class TripListItem extends Component {
                 </div>  
             );
         }
-    
-}

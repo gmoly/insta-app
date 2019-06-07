@@ -25,7 +25,6 @@ export default function Map( { markerId, places, scrollToRef }) {
   );
 
   function mapMarkers() {
-    console.log(places);
     return places.map( (element, i) => {
       if (element.location) {
           var geoPosition = [element.location.latitude, element.location.longitude];
