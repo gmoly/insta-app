@@ -53,7 +53,6 @@ export default class TripsService {
     }
 
     mapInstItemsToTrip(items, userId) {
-        console.log(items)
        return {
             id: '',
             userId: userId,
