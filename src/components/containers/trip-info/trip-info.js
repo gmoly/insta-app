@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { withTripsService } from '../../hoc/with-trips-service';
-import { compose } from '../../../utils/compose';
+import { tripsServiceContext } from '../../app-service-context/service-context';
 import ErrorIndicator from '../../error-indicator/error-indicator';
 import Spinner from '../../spinner/spinner';
 import { getTripById } from '../../../actions';
@@ -11,7 +10,9 @@ import TripListItem from '../trip-list/trip-list-item';
 
 function TripInfoContainer( { tripId, tripById, trip, loading, error } ) {
 
-        useEffect(() => { tripById(tripId) });
+        const tripsService = useContext(tripsServiceContext);
+
+        useEffect(() => { tripById(tripId, tripsService) },[]);
    
         if (loading) { return <Spinner /> }
         
@@ -28,14 +29,11 @@ function TripInfoContainer( { tripId, tripById, trip, loading, error } ) {
     return { trip, loading, error };
   }
   
-  const mapDispatchToProps = (dispatch, { tripsService }) =>
+  const mapDispatchToProps = (dispatch) =>
   {
       return bindActionCreators (
-          { tripById: (tripId) => dispatch(getTripById(tripId, tripsService)) },
+          { tripById: (tripId, tripsService) => dispatch(getTripById(tripId, tripsService)) },
            dispatch); 
   };
   
-  export default compose (
-      withTripsService(),
-      connect(mapStateToProps, mapDispatchToProps)
-  )(TripInfoContainer)
+  export default connect(mapStateToProps, mapDispatchToProps)(TripInfoContainer)

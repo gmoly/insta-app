@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import TripListItem from './trip-list-item';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import Spinner from '../spinner/spinner';
-import { withTripsService } from '../hoc/with-trips-service';
+import { tripsServiceContext } from '../../app-service-context/service-context';
 import { fetchTrips } from '../../actions';
-import { compose } from '../../utils/compose';
 import ErrorIndicator from '../error-indicator/error-indicator';
 
 const TripList = ({ trips }) => {
@@ -26,7 +25,9 @@ const TripList = ({ trips }) => {
 
 function TripListContainer({ trips, loading, error, fetchTrips }) {
 
-        useEffect(() => { fetchTrips() });
+        const tripsService = useContext(tripsServiceContext);
+
+        useEffect(() => { fetchTrips(tripsService) },[]);
 
         if (loading) { return <Spinner /> }
         
@@ -39,14 +40,11 @@ const mapStateToProps = ( { tripList : { trips, loading, error } }) => {
     return { trips, loading, error };
 }
 
-const mapDispatchToProps = (dispatch, { tripsService }) =>
+const mapDispatchToProps = (dispatch) =>
 {
     return bindActionCreators (
-        { fetchTrips: fetchTrips(tripsService) },
+        { fetchTrips: (tripsService) => dispatch(fetchTrips(tripsService)) },
          dispatch); 
  };
 
-export default compose (
-    withTripsService(),
-    connect(mapStateToProps, mapDispatchToProps)
-)(TripListContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(TripListContainer)

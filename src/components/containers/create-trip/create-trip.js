@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { withTripsService } from '../../hoc/with-trips-service';
-import { compose } from '../../../utils/compose';
+import { tripsServiceContext } from '../../app-service-context/service-context';
 import ErrorIndicator from '../../error-indicator/error-indicator';
 import { saveTrip, removeTrip } from '../../../actions';
 
@@ -10,10 +9,12 @@ import TripForm from './create-trip-form';
 
 function CreateTripContainer({ trip, saveTrip, removeTrip }) {
 
+    const tripsService = useContext(tripsServiceContext);
+
         if (trip) {  
             return <TripForm items={ trip } 
-                             handleSubmit={ (tripData) => saveTrip(tripData) }
-                             removeTrip={ (id) => removeTrip(id) } />  }
+                             handleSubmit={ (tripData) => saveTrip(tripData, tripsService) }
+                             removeTrip={ (id) => removeTrip(id, tripsService) } />  }
         else { return <ErrorIndicator /> }  
 
 }
@@ -22,15 +23,12 @@ const mapStateToProps = ( { tripData : { trip } } ) => {
     return { trip };
 }
 
-const mapDispatchToProps = (dispatch, { tripsService }) =>
+const mapDispatchToProps = (dispatch) =>
 {
    return  bindActionCreators (
-         { saveTrip: (tripData) => dispatch(saveTrip(tripData, tripsService)),
-           removeTrip: (id) => dispatch(removeTrip(id, tripsService)) },
+         { saveTrip: (tripData, tripsService) => dispatch(saveTrip(tripData, tripsService)),
+           removeTrip: (id, tripsService) => dispatch(removeTrip(id, tripsService)) },
          dispatch); 
  };
 
-export default compose (
-    withTripsService(),
-    connect(mapStateToProps, mapDispatchToProps)
-)(CreateTripContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateTripContainer)
