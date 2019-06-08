@@ -32,9 +32,7 @@ function InstItemListContainer({items, loading, error, createTrip, user, token, 
    const instagramService = useContext(instagramServiceContext);
 
     useEffect( () => {
-        if (items.length > 0) {
-            loadInstItems(instagramService, token, items.slice(-1)[0].id);
-        } else {
+        if (items.length === 0) {
             loadInstItems(instagramService, token);
         }
     }, [])
