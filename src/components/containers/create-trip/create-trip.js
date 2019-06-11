@@ -31,4 +31,4 @@ const mapDispatchToProps = (dispatch) =>
          dispatch); 
  };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateTripContainer)
+export default connect(mapDispatchToProps)(CreateTripContainer)

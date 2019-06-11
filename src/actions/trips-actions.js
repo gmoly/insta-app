@@ -7,11 +7,6 @@ const fetchTrips = (tripsService) => () => (dispatch) => {
     .catch((err) => dispatch(itemsError('FETCH_TRIPS_FAILURE',err)));
 }
 
-const createTrip = (tripService, newTrip, userId) => () => (dispatch) => {
-    const tripData = tripService.mapInstItemsToTrip(newTrip, userId)
-    dispatch(itemsLoaded('CREATE_TRIP', tripData))
-}
-
 const saveTrip = (tripData, tripService) => () => (dispatch) => {
     tripService.saveTrip(tripData)
     .then((result) => {
@@ -34,4 +29,4 @@ const getTripById = (id, tripService) => () => (dispatch) => {
     .catch((err) => dispatch(itemsError('FETCH_TRIP_FAILURE', err)))
 }
 
-export { fetchTrips, createTrip, saveTrip, removeTrip, getTripById };
+export { fetchTrips, saveTrip, removeTrip, getTripById };

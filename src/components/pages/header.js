@@ -16,8 +16,8 @@ const Header = ({ location }) => {
             <li className={ checkIsActive("/", location) }>
             <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
             </li>
-            <li className={ checkIsActive("/new-trip", location) }>
-            <a className="nav-link" href="/new-trip">Create Trip</a>
+            <li className={ checkIsActive("/inst", location) }>
+            <a className="nav-link" href="/inst">Create Trip</a>
             </li>
         </ul>
             <HeaderDataContainer />

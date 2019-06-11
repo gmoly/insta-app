@@ -1,9 +1,9 @@
 import React from 'react';
 import CreateTrip from '../containers/create-trip/create-trip'
 
-const NewTripPage = () => {
+const NewTripPage = ({ location }) => {
    return (
-        <CreateTrip />
+        <CreateTrip trip = { location.state.tripData }/>
    );
 };
 

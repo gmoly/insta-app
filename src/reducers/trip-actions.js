@@ -9,12 +9,6 @@ const tripActions = (state, action) => {
     }
 
         switch (action.type) {
-            case 'CREATE_TRIP':
-            return {
-                trip: action.payload,
-                loading: false,
-                error: null
-            };
             case 'SAVE_TRIP':
             return {
                 trip: action.payload,
