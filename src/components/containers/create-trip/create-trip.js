@@ -13,14 +13,10 @@ function CreateTripContainer({ trip, saveTrip, removeTrip }) {
 
         if (trip) {  
             return <TripForm items={ trip } 
-                             handleSubmit={ (tripData) => saveTrip(tripData, tripsService) }
+                             handleSubmit={ (tripData) => { saveTrip(tripData, tripsService) } }
                              removeTrip={ (id) => removeTrip(id, tripsService) } />  }
         else { return <ErrorIndicator /> }  
 
-}
-
-const mapStateToProps = ( { tripData : { trip } } ) => {
-    return { trip };
 }
 
 const mapDispatchToProps = (dispatch) =>
@@ -31,4 +27,4 @@ const mapDispatchToProps = (dispatch) =>
          dispatch); 
  };
 
-export default connect(mapDispatchToProps)(CreateTripContainer)
+export default connect(null, mapDispatchToProps)(CreateTripContainer)
