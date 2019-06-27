@@ -4,6 +4,10 @@
   }
 
 .carousel-container{
-    width:612px;
-    height:612px;
+    width:312px;
+    height:312px;
+}
+
+.card-collaps{
+  width:800px;
 }
