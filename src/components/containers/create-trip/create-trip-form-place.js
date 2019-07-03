@@ -37,6 +37,14 @@ function placeData(place, index, updatePlaceData) {
                     useLocation({latitude: lat, longitude: lng})
                 }
 
+                function validateFormItem() {
+                    if (title && description) {
+                        useValidation('');
+                    } else {
+                        useValidation('rgba(255,120,81,0.25)');
+                    }
+                }
+
                 useEffect(() => {
                     const place = {
                     ...place,
@@ -45,11 +53,7 @@ function placeData(place, index, updatePlaceData) {
                     location: location,
                     media: media.image
                     }
-                    if (title && description) {
-                        useValidation('');
-                    } else {
-                        useValidation('rgba(255,120,81,0.25)');
-                    }
+                    validateFormItem()
                     updatePlaceData(index, place)
                   }, [title, description, location, media, open]);
 
