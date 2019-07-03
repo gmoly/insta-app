@@ -30,13 +30,13 @@ function placeData(place, index, updatePlaceData) {
                 const [location, useLocation] = useState(place.location);
                 const [media, useMedia] = useState(place.media);
                 const [open, useOpen] = useState(false);
+                const [validation, useValidation] = useState('rgba(255,120,81,0.25)');
 
                 function handlePositionChanged(e) {
                     const { lat, lng } = e.latlng;
                     useLocation({latitude: lat, longitude: lng})
                 }
 
-                
                 useEffect(() => {
                     const place = {
                     ...place,
@@ -45,12 +45,17 @@ function placeData(place, index, updatePlaceData) {
                     location: location,
                     media: media.image
                     }
+                    if (title && description) {
+                        useValidation('');
+                    } else {
+                        useValidation('rgba(255,120,81,0.25)');
+                    }
                     updatePlaceData(index, place)
                   }, [title, description, location, media, open]);
 
 
                 return (
-                    <div className="card" key={index} style={{ width: '100%' }}>
+                    <div className="card" key={index} style={{ width: '100%', backgroundColor: validation }}>
                         <div className="card-header" id={"heading_"+index}>
                                 <h5 className="mb-0">
                                     <button
@@ -82,7 +87,7 @@ function placeData(place, index, updatePlaceData) {
                                     <div className="form-group map-canvas">
                                             <LeafletMap
                                                 center={[location.latitude, location.longitude]}
-                                                zoom={6}
+                                                zoom={15}
                                                 minZoom={2}
                                                 maxZoom={17}
                                                 attributionControl={true}

@@ -1,4 +1,4 @@
-import React, { useState }  from 'react';
+import React, { useState, useEffect }  from 'react';
 import  PlacesData from './create-trip-form-place';
 
 import '../maps/leaflet-map.css'
@@ -8,6 +8,12 @@ export default function TripForm({ items, handleSubmit, removeTrip }) {
     const [places, usePlaces] = useState(items.places)
     const [title, useTitle] = useState(items.title)
     const [description, useDescription] = useState(items.description)
+
+    function isDisabled() {
+        var isPlacesValid = true;
+        places.map( item =>  { if ( !(item.placeTitle && item.placeDescription) ) { isPlacesValid = false; return true }  })
+        return !(title && description && isPlacesValid)
+    } 
   
     function getInputValue() {
       return ( { ...items,
@@ -32,7 +38,7 @@ export default function TripForm({ items, handleSubmit, removeTrip }) {
     }
 
         return(
-            <div class="container w-80">
+            <div className="container w-80">
                 <form onSubmit={ (e) => submit(e)}>
                     <fieldset>
                         <legend className="py-5 text-center">Share your trip data here</legend>
@@ -49,7 +55,7 @@ export default function TripForm({ items, handleSubmit, removeTrip }) {
                                 defaultValue={description} onChange={ e => useDescription(e.target.value)} />
                         </div>
                         <PlacesData items={items} updatePlaceData={updatePlaceData} />
-                        <button type="submit" className="btn btn-primary">Submit</button>
+                        <button type="submit" className="btn btn-primary"  disabled={ isDisabled() } >Submit</button>
                     </fieldset>
                 </form>
             </div>
