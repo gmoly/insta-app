@@ -58,6 +58,8 @@ export default function ImagePicker({ multiple, onPick, images }) {
               src={image.src}
               isSelected={ picked.has(image.value)} 
               onImageClick={() => handleImageClick(image)} 
+              width={300}
+              height={180}
               key={i}
             />
             <div className="card-body">

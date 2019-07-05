@@ -14,14 +14,14 @@ Image.propTypes = {
   isSelected: PropTypes.bool
 }
 
-export default function Image({ src, isSelected, onImageClick }) {
+export default function Image({ src, isSelected, onImageClick, width, height }) {
 
     return (
       <div className={`responsive${isSelected ? " selected" : ""}`}
         onClick={onImageClick}>
         <img src={src}
           className={`thumbnail${isSelected ? " selected" : ""}`}
-          style={ImageStyle(300, 180)}
+          style={ImageStyle(width, height)}
         />
         <div className="checked">
           <div className="icon"/>
