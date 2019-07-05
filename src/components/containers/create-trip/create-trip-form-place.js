@@ -1,13 +1,8 @@
 import React, { useState, useEffect }  from 'react';
 import { Map as LeafletMap,TileLayer,Marker } from 'react-leaflet';
 import {  iconInstagram  } from '../maps/icon';
-import ImageCarousel from '../../images/image-carousel';
 import Collapse from 'react-bootstrap/Collapse';
 import PlaceImagePicker from '../../images/PlaceImagePicker';
-
-import '../maps/leaflet-map.css';
-import './create-trip-form.css';
-
 
 export default function placesData({items, updatePlaceData}) {
 
@@ -31,7 +26,7 @@ function placeData(place, index, updatePlaceData) {
                 const [location, useLocation] = useState(place.location);
                 const [media, useMedia] = useState(place.media);
                 const [selectedImages, useSelectedImages] = useState([]);
-                const [open, useOpen] = useState(false);
+                const [open, useOpen] = useState(true);
                 const [titleValidation, useTitleValidation] = useState("badge badge-secondary");
                 const [descriptionValidation, useDescriptionValidation] = useState("badge badge-secondary");
                 const [imagesValidation, useImagesValidation] = useState("badge badge-secondary");
@@ -59,6 +54,8 @@ function placeData(place, index, updatePlaceData) {
                     return "place"
                 }
 
+                useEffect(() => {useOpen(false)}, [])
+
                 useEffect(() => {
                     const place = {
                     ...place,
@@ -69,7 +66,7 @@ function placeData(place, index, updatePlaceData) {
                     }
                     validateFormItem()
                     updatePlaceData(index, place)
-                  }, [title, description, location, selectedImages, open]);
+                  }, [title, description, location, selectedImages]);
 
 
                 return (
@@ -109,8 +106,8 @@ function placeData(place, index, updatePlaceData) {
                                     </div>
                                     <div className="form-group">
                                     <span>Place position :</span>
-                                        <div className="map-canvas mx-auto">
                                             <LeafletMap
+                                                style={{height: "200px", width: '80%'}}
                                                 center={[location.latitude, location.longitude]}
                                                 zoom={15}
                                                 minZoom={2}
@@ -130,7 +127,6 @@ function placeData(place, index, updatePlaceData) {
                                                     onmouseout={(e) => handlePositionChanged(e) }
                                                     />
                                             </LeafletMap>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

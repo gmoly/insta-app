@@ -9,6 +9,8 @@ import ErrorBoundry from './components/error-boundry/error-boundry';
 import { store } from './store';
 import { persistor } from './store';
 
+import "leaflet/dist/leaflet.css";
+
 const application = (
     <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>

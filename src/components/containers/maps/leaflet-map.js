@@ -2,8 +2,6 @@ import React, { useRef, useEffect, useState } from 'react'
 import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
 import {  iconInstagram  } from './icon';
 
-import './leaflet-map.css'
-
 export default function Map( { markerId, places, scrollToRef }) {
   const myRefs = [];
   places.map(() => myRefs.push(useRef()));
@@ -47,6 +45,7 @@ export default function Map( { markerId, places, scrollToRef }) {
 
     return (
       <LeafletMap
+        style={{width: '100%', height: '100%'}}
         center={[50, 10]}
         zoom={6}
         minZoom={2}

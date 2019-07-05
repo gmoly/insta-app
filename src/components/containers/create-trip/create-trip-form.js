@@ -1,7 +1,5 @@
 import React, { useState, useEffect }  from 'react';
 import  PlacesData from './create-trip-form-place';
-
-import '../maps/leaflet-map.css'
 import './create-trip-form.css'
 
 export default function TripForm({ items, handleSubmit, removeTrip }) {
