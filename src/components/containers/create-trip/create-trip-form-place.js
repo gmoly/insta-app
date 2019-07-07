@@ -2,7 +2,8 @@ import React, { useState, useEffect }  from 'react';
 import { Map as LeafletMap,TileLayer,Marker } from 'react-leaflet';
 import {  iconInstagram  } from '../maps/icon';
 import Collapse from 'react-bootstrap/Collapse';
-import PlaceImagePicker from '../../images/PlaceImagePicker';
+import ImagesBox from './create-trip-form-place-images';
+
 
 export default function placesData({items, updatePlaceData}) {
 
@@ -24,12 +25,10 @@ function placeData(place, index, updatePlaceData) {
                 const [title, useTitle] = useState(place.placeTitle);
                 const [description, useDescription] = useState(place.placeDescription);
                 const [location, useLocation] = useState(place.location);
-                const [media, useMedia] = useState(place.media);
-                const [selectedImages, useSelectedImages] = useState([]);
+                const [selectedMedia, useSelectedMedia] = useState(place.media.image);
                 const [open, useOpen] = useState(true);
                 const [titleValidation, useTitleValidation] = useState("badge badge-secondary");
                 const [descriptionValidation, useDescriptionValidation] = useState("badge badge-secondary");
-                const [imagesValidation, useImagesValidation] = useState("badge badge-secondary");
                 const [validation, useValidation] = useState("border-secondary");
 
                 function handlePositionChanged(e) {
@@ -40,8 +39,9 @@ function placeData(place, index, updatePlaceData) {
                 function validateFormItem() {
                     title ? useTitleValidation('') : useTitleValidation("badge badge-secondary");
                     description ? useDescriptionValidation('') : useDescriptionValidation("badge badge-secondary");
-                    selectedImages.length > 0 ? useImagesValidation('') : useImagesValidation("badge badge-secondary");
-                    title && description && selectedImages.length > 0 ? useValidation('') : useValidation("border-secondary")
+                    const isFormValid = title && description && selectedMedia.length > 0;
+                    isFormValid ? useValidation('') : useValidation("border-secondary")
+                    return isFormValid
                 }
 
                 function placeLabel() {
@@ -57,16 +57,19 @@ function placeData(place, index, updatePlaceData) {
                 useEffect(() => {useOpen(false)}, [])
 
                 useEffect(() => {
-                    const place = {
-                    ...place,
-                    placeTitle: title,
-                    placeDescription: description,
-                    location: location,
-                    media: media.image
+                    if (validateFormItem()) {
+                        const media = selectedMedia.length > 1 ? 
+                        { image: selectedMedia[0], carousel: selectedMedia } : { image: selectedMedia[0] }
+                        const place = {
+                        ...place,
+                        placeTitle: title,
+                        placeDescription: description,
+                        location: location,
+                        media: media
+                        }
+                        updatePlaceData(index, place)
                     }
-                    validateFormItem()
-                    updatePlaceData(index, place)
-                  }, [title, description, location, selectedImages]);
+                  }, [title, description, location, selectedMedia]);
 
 
                 return (
@@ -87,29 +90,24 @@ function placeData(place, index, updatePlaceData) {
                             <div id={"collaps_"+index} className="collapse" aria-labelledby={"heading_"+index}>
                                 <div className="card-body"> 
                                     <div className="form-group">
-                                    <span className={ imagesValidation }>Place images:</span>
-                                        <PlaceImagePicker 
-                                            images={place.media.carousel.map((item, i) => ({src: item.images.low_resolution.url, value: i, object: item}))}
-                                            onPick = {(images) => useSelectedImages(images.map( element => { return element.src })) }
-                                            multiple
-                                        />
+                                        <ImagesBox media={place.media} updateMedia={ useSelectedMedia } />
                                     </div>    
-                                    <div className="form-group col-md-6 mb-3">
+                                    <div className="form-group">
                                     <span className={"mb-2 " + titleValidation }>Place title:</span>
-                                        <input className="form-control" id="inputPlaceTitle" aria-describedby="titleHelp" 
+                                        <input className="form-control col-md-6 mb-3" id="inputPlaceTitle" aria-describedby="titleHelp" 
                                             placeholder="enter place title" defaultValue={ title } onChange= { (e) => { useTitle(e.target.value) } }/>
                                     </div>
-                                    <div className="form-group col-md-10 mb-3">
+                                    <div className="form-group">
                                     <span className={"mb-2 " + descriptionValidation }>Place description:</span>
-                                        <textarea className="form-control" id="inputPlaceDescription" rows="6" 
+                                        <textarea className="form-control col-md-10 mb-3" id="inputPlaceDescription" rows="6" 
                                         defaultValue={description} onChange= {(e) => { useDescription(e.target.value) }} />
                                     </div>
                                     <div className="form-group">
                                     <span>Place position :</span>
                                             <LeafletMap
-                                                style={{height: "200px", width: '80%'}}
+                                                style={{height: "200px", width: '85%'}}
                                                 center={[location.latitude, location.longitude]}
-                                                zoom={15}
+                                                zoom={13}
                                                 minZoom={2}
                                                 maxZoom={17}
                                                 attributionControl={true}

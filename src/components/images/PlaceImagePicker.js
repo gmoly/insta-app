@@ -7,7 +7,7 @@ import Image from './Image'
 
 export default function PlaceImagePicker({ multiple, onPick, images }) {
 
-    const [picked, usePicked] = useState(Map());
+    const [picked, usePicked] = useState(new Map(images.map(image =>[image.value, image.object])));
 
     return (
         <div className="image_picker row mx-auto">

@@ -41,19 +41,33 @@ export default function TripForm({ items, handleSubmit, removeTrip }) {
                     <fieldset>
                         <legend className="py-5 text-center">Share your trip data here</legend>
                         {  idFieldData(items.id) }
-                            <div className="form-group col-md-6 mb-3">
-                                <label htmlFor="inputTitle">Trip title</label>
-                                <input className="form-control" id="inputTitle" 
-                                aria-describedby="titleHelp" placeholder="enter trip title" 
-                                defaultValue={title} onChange={ e => useTitle(e.target.value) }/>
+                        <div className="row">
+                            <div className="col-md-9 mb-3">
+                                <div className="form-group">
+                                    <label htmlFor="inputTitle">Trip title:</label>
+                                    <input className="form-control" id="inputTitle" 
+                                    aria-describedby="titleHelp" placeholder="enter trip title" 
+                                    defaultValue={title} onChange={ e => useTitle(e.target.value) }/>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="inputDescription">General trip description:</label>
+                                    <textarea  className="form-control" id="inputDescription" rows="6" 
+                                    defaultValue={description} onChange={ e => useDescription(e.target.value)} />
+                                </div>
                             </div>
-                        <div className="form-group col-md-10 mb-3">
-                                <label htmlFor="inputDescription1">Yor general trip description</label>
-                                <textarea  className="form-control" id="inputDescription" rows="6" 
-                                defaultValue={description} onChange={ e => useDescription(e.target.value)} />
-                        </div>
-                        <PlacesData items={items} updatePlaceData={updatePlaceData} />
-                        <button type="submit" className="btn btn-primary"  disabled={ isDisabled() } >Submit</button>
+                            <div className="form-group col-md-3">
+                                <div className="mt-5 h-75">
+                                    <p className="text-center text-justify">Please enter title, description, and general places information,
+                                    only when all data populated form can be submitted.
+                                    </p>
+                                    <button type="submit" className="btn btn-primary d-block mx-auto" style={{marginBottom: "1%"}}  disabled={ isDisabled() } >Submit</button>
+                                </div>
+                            </div>
+                        </div>    
+                            <div className="form-group">
+                                <label htmlFor="inputPlaces">Places:</label>
+                                <PlacesData items={items} updatePlaceData={updatePlaceData} />
+                            </div>
                     </fieldset>
                 </form>
             </div>
