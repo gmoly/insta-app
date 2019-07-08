@@ -7,12 +7,19 @@ export default function TripForm({ items, handleSubmit, removeTrip }) {
     const [title, useTitle] = useState(items.title)
     const [description, useDescription] = useState(items.description)
     const [placesValid, usePlacesValid] = useState(items.places.map(item => false))
+    const [titleValidation, useTitleValidation] = useState("badge badge-secondary");
+    const [descriptionValidation, useDescriptionValidation] = useState("badge badge-secondary");
+    const [validation, useValidation] = useState(false);
 
-    function isDisabled() {
+    function validate() {
+        title ? useTitleValidation('') : useTitleValidation("badge badge-secondary");
+        description ? useDescriptionValidation('') : useDescriptionValidation("badge badge-secondary");
         var isPlacesValid = true;
         placesValid.map( item =>  { if ( !item ) { isPlacesValid = false; return true }  })
-        return !(title && description && isPlacesValid)
+        useValidation(!(title && description && isPlacesValid))
     } 
+
+
   
     function getInputValue() {
       return ( { ...items,
@@ -39,6 +46,10 @@ export default function TripForm({ items, handleSubmit, removeTrip }) {
         removeTrip(id)
     }
 
+    useEffect(() => {
+        validate()
+    }, [title, description, placesValid])
+
         return(
             <div className="container w-80">
                 <form onSubmit={ (e) => submit(e)}>
@@ -48,13 +59,13 @@ export default function TripForm({ items, handleSubmit, removeTrip }) {
                         <div className="row">
                             <div className="col-md-9 mb-3">
                                 <div className="form-group">
-                                    <label htmlFor="inputTitle">Trip title:</label>
+                                    <span className={"mb-2 " + titleValidation }>Trip title:</span>
                                     <input className="form-control" id="inputTitle" 
                                     aria-describedby="titleHelp" placeholder="enter trip title" 
                                     defaultValue={title} onChange={ e => useTitle(e.target.value) }/>
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="inputDescription">General trip description:</label>
+                                    <span className={"mb-2 " + descriptionValidation }>General trip description:</span>
                                     <textarea  className="form-control" id="inputDescription" rows="6" 
                                     defaultValue={description} onChange={ e => useDescription(e.target.value)} />
                                 </div>
@@ -64,7 +75,7 @@ export default function TripForm({ items, handleSubmit, removeTrip }) {
                                     <p className="text-center text-justify">Please enter title, description, and general places information,
                                     only when all data populated form can be submitted.
                                     </p>
-                                    <button type="submit" className="btn btn-primary d-block mx-auto" style={{marginBottom: "1%"}}  disabled={ isDisabled() } >Submit</button>
+                                    <button type="submit" className="btn btn-primary d-block mx-auto" style={{marginBottom: "1%"}}  disabled={ validation } >Submit</button>
                                 </div>
                             </div>
                         </div>    
