@@ -67,7 +67,9 @@ function placeData(place, index, updatePlaceData) {
                         location: location,
                         media: media
                         }
-                        updatePlaceData(index, place)
+                        updatePlaceData(true, index, place)
+                    } else {
+                        updatePlaceData(false, index)
                     }
                   }, [title, description, location, selectedMedia]);
 

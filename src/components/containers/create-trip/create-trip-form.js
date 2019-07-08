@@ -6,10 +6,11 @@ export default function TripForm({ items, handleSubmit, removeTrip }) {
     const [places, usePlaces] = useState(items.places)
     const [title, useTitle] = useState(items.title)
     const [description, useDescription] = useState(items.description)
+    const [placesValid, usePlacesValid] = useState(items.places.map(item => false))
 
     function isDisabled() {
         var isPlacesValid = true;
-        places.map( item =>  { if ( !(item.placeTitle && item.placeDescription) ) { isPlacesValid = false; return true }  })
+        placesValid.map( item =>  { if ( !item ) { isPlacesValid = false; return true }  })
         return !(title && description && isPlacesValid)
     } 
   
@@ -26,8 +27,11 @@ export default function TripForm({ items, handleSubmit, removeTrip }) {
         handleSubmit(getInputValue())
     }
 
-    function updatePlaceData(i, place) {
-        usePlaces(places.map( (item, index) => index === i ? place : item))
+    function updatePlaceData(isValid, i, place) {
+        if (isValid) {
+            usePlaces(places.map( (item, index) => index === i ? place : item))
+        }
+        usePlacesValid(placesValid.map((item, index) => index === i ? isValid : item))
     }
     
     function rmTrip(e, id){
