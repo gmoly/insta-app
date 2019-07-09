@@ -7,7 +7,7 @@ import Image from './Image'
 
 export default function PlaceImagePicker({ multiple, onPick, images }) {
 
-    const [picked, usePicked] = useState(new Map(images.map(image =>[image.value, image.object])));
+    const [picked, usePicked] = useState(images.map( (image) => { return { value: image.value, object: image.object} } ));
 
     return (
         <div className="image_picker row mx-auto">
@@ -20,27 +20,24 @@ export default function PlaceImagePicker({ multiple, onPick, images }) {
           <div key={"image_"+i} className="col-lg-3 col-md-4 col-xs-6 thumb">
               <Image 
                 src={image.src}
-                isSelected={ picked.has(image.value)} 
                 onImageClick={() => handleImageClick(image)} 
                 width={180}
                 height={180}
                 key={i}
+                selectedIndex = { picked.findIndex(item => item.value === image.value) + 1 }
               />
           </div>
       )
     }
     
     function handleImageClick(image) {
-      const pickedImage = multiple ? picked : Map()
-      const newerPickedImage = 
-        pickedImage.has(image.value) ? 
-          pickedImage.delete(image.value) : 
-            pickedImage.set(image.value, image.object)
-            usePicked(newerPickedImage)
+      var pickedImage = multiple ? picked : []
+      const index = pickedImage.findIndex(item => item.value === image.value);
+       index >= 0 ? pickedImage.splice(index, 1) : pickedImage.push({ value: image.value, object: image.object})
+      usePicked(pickedImage)
     
       const pickedImageToArray = []
-      newerPickedImage.map((image, i) => pickedImageToArray.push({src: image, value: i}))
-      
+      pickedImage.map((item, i) => pickedImageToArray.push({src: item.object, value: i}))
       onPick(multiple ? pickedImageToArray : pickedImageToArray[0])
     }
 }

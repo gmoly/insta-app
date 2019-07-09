@@ -14,20 +14,18 @@ Image.propTypes = {
   isSelected: PropTypes.bool
 }
 
-export default function Image({ src, isSelected, onImageClick, width, height }) {
+export default function Image({ src, onImageClick, width, height, selectedIndex }) {
 
     return (
-      <div className={`responsive${isSelected ? " selected" : ""}`}
+      <div className={`responsive${selectedIndex > 0 ? " selected" : ""}`}
         onClick={onImageClick}>
         <img src={src}
-          className={`thumbnail${isSelected ? " selected" : ""}`}
+          className={`thumbnail${selectedIndex > 0 ? " selected" : ""}`}
           style={ImageStyle(width, height)}
         />
         <div className="checked">
-          <div className="icon"/>
+        <span className="badge badge-pill badge-secondary" style={{ height: "50px", width: "50px", fontSize: "xx-large"}}>{selectedIndex}</span>
         </div>
       </div>
     )
   }
-
-  //<span className="badge badge-pill badge-secondary" style={{ height: "50px", width: "50px", fontSize: "xx-large"}}>{pickedIndex}</span>

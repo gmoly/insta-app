@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Map } from 'immutable'
 import Modal from 'react-bootstrap/Modal'
 import ImageCarousel from '../images/image-carousel';
 
@@ -21,7 +20,7 @@ function ModalHeader({ media }) {
 
 export default function ImagePicker({ multiple, onPick, images }) {
 
-    const [picked, usePicked] = useState(Map());
+    const [picked, usePicked] = useState([]);
     const [show, useShow] = useState(false);
     const [modalMedia, useModalMedia] = useState();
 
@@ -56,11 +55,11 @@ export default function ImagePicker({ multiple, onPick, images }) {
             <h3 className="card-header mb-3">{image.object.location.name}</h3>
             <Image 
               src={image.src}
-              isSelected={ picked.has(image.value)} 
               onImageClick={() => handleImageClick(image)} 
               width={300}
               height={180}
               key={i}
+              selectedIndex = { picked.findIndex(item => item.value === image.value) + 1 }
             />
             <div className="card-body">
               <p className="card-text">{image.object.description}</p>
@@ -71,18 +70,15 @@ export default function ImagePicker({ multiple, onPick, images }) {
           </div>
       )
     }
-    
+
     function handleImageClick(image) {
-      const pickedImage = multiple ? picked : Map()
-      const newerPickedImage = 
-        pickedImage.has(image.value) ? 
-          pickedImage.delete(image.value) : 
-            pickedImage.set(image.value, image.object)
-            usePicked(newerPickedImage)
+      var pickedImage = multiple ? picked : []
+      const index = pickedImage.findIndex(item => item.value === image.value);
+       index >= 0 ? pickedImage.splice(index, 1) : pickedImage.push({ value: image.value, object: image.object})
+      usePicked(pickedImage)
     
       const pickedImageToArray = []
-      newerPickedImage.map((image, i) => pickedImageToArray.push({src: image, value: i}))
-      
+      pickedImage.map((item, i) => pickedImageToArray.push({src: item.object, value: i}))
       onPick(multiple ? pickedImageToArray : pickedImageToArray[0])
     }
 }
