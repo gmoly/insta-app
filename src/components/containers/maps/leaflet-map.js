@@ -35,7 +35,7 @@ export default function Map( { markerId, places, scrollToRef }) {
             icon= {iconInstagram(i+1)}
             key={i+1} >
           <Popup>
-              {element.placeDescription}
+              {element.placeTitle}
           </Popup>
           </Marker> 
           ); 
@@ -46,8 +46,8 @@ export default function Map( { markerId, places, scrollToRef }) {
     return (
       <LeafletMap
         style={{width: '100%', height: '100%'}}
-        center={[50, 10]}
-        zoom={6}
+        center={[places[0].location.latitude, places[0].location.longitude]}
+        zoom={10}
         minZoom={2}
         maxZoom={17}
         attributionControl={true}

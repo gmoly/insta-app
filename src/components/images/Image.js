@@ -29,3 +29,5 @@ export default function Image({ src, isSelected, onImageClick, width, height }) 
       </div>
     )
   }
+
+  //<span className="badge badge-pill badge-secondary" style={{ height: "50px", width: "50px", fontSize: "xx-large"}}>{pickedIndex}</span>

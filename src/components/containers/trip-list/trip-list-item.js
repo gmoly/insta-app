@@ -33,16 +33,16 @@ export default function TripListItem( { trip } ) {
                     </div>  
                     <div className="container-fluid" id="main">
                         <div className="row">
-                            <div className="col-xs-8" id="left">
+                            <div className="col-md-8" id="left">
                             
-                            <h2>{ trip.title }</h2>
-                            <p>{ trip.description }</p>
+                            <h2 className="text-center">{ trip.title }</h2>
+                            <p className="text-center">{ trip.description }</p>
                             
                             <hr />
-                            <div className="places-block">
+                            <div>
                                 { trip.places.map(( (place, i) => { return ( 
                                     <div ref={ myRefs[i] } key={i+1} onMouseEnter={() => {changeStateAdd(i+1)}} onMouseLeave={() => {changeStateRemove(i+1)}}>
-                                        <TripPlace place={place}/>
+                                        <TripPlace place={place} index={i+1} />
                                     </div>
                              ); } ))}
                             </div> 
@@ -52,7 +52,7 @@ export default function TripListItem( { trip } ) {
                             <hr />      
 
                             </div>
-                            <div className="col-xs-4"></div>
+                            <div className="col-md-4"></div>
                         </div> 
                     </div>
                 </div>  
