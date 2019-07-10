@@ -1,9 +1,15 @@
 import React from 'react';
+import spinner from './spinner.gif';
 
 import './spinner.css';
 
+
 const Spinner = () => {
-    return <div>loading...</div>
-};
+    return (
+        <div className="d-flex justify-content-center">
+            <img className="" src={spinner} />
+        </div>
+    )
+}
 
 export default Spinner;

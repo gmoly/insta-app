@@ -17,15 +17,17 @@ Image.propTypes = {
 export default function Image({ src, onImageClick, width, height, selectedIndex }) {
 
     return (
-      <div className={`responsive${selectedIndex > 0 ? " selected" : ""}`}
-        onClick={onImageClick}>
-        <img src={src}
-          className={`thumbnail${selectedIndex > 0 ? " selected" : ""}`}
-          style={ImageStyle(width, height)}
-        />
-        <div className="checked">
-        <span className="badge badge-pill badge-secondary" style={{ height: "50px", width: "50px", fontSize: "xx-large"}}>{selectedIndex}</span>
+      <React.Fragment>
+        <div className={`responsive${selectedIndex > 0 ? " selected" : ""}`}
+          onClick={onImageClick}>
+          <img src={src}
+            className={`thumbnail${selectedIndex > 0 ? " selected" : ""}`}
+            style={ImageStyle(width, height)}
+          />
         </div>
-      </div>
+        <div className={ selectedIndex > 0 ? "checked" : "unchecked"}>
+          <span className="font-weight-bold">{selectedIndex}</span>
+        </div>
+      </React.Fragment>
     )
   }

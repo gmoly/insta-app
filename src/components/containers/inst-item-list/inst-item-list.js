@@ -1,33 +1,44 @@
-import React, { Fragment, useEffect, useContext, useState } from 'react';
+import React, {useEffect, useContext, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 
 import Spinner from '../../spinner/spinner';
 import { instagramServiceContext, tripsServiceContext } from '../../app-service-context/service-context';
-import { fetchInstItems, createTrip } from '../../../actions';
+import { fetchInstItems } from '../../../actions';
 import ErrorIndicator from '../../error-indicator/error-indicator';
 
 import ImagePicker from '../../images/ImagePicker';
 import  { Redirect } from 'react-router-dom';
+
+import actionButton from './action-btn.gif';
+import staticButton from './static-btn.png';
+import moreButton from './more.gif';
 
 
 
 const InstItemList = ({ loading, items, token, loadInstItems, instagramService, tripData, useSelectedImages }) => {
     const spinner = loading ? <Spinner /> : '';
     const isDisabled = tripData.places.length > 0 ? '' : 'disabled'
+    const btn = isDisabled ? staticButton : actionButton
 
     return (
-        <Fragment>
-            <ImagePicker 
-            images={items.map((item, i) => ({src: item.images.low_resolution.url, value: i, object: item}))}
-            onPick = {(images) => useSelectedImages(images.map( element => { return element.src })) }
-            multiple
-            />
-             { spinner }
-            <button type="button" className="btn btn-primary" onClick={ () => loadInstItems(instagramService, token, items.slice(-1)[0].id) }>Load more</button>
-            <Link className={"btn btn-primary "+ isDisabled } to={{ pathname: '/new-trip',  state: { tripData }}}>CREATE TRIP</Link>
-        </Fragment>
+        <div className="album py-5 bg-light">
+            <div className="container">
+                    <ImagePicker 
+                    images={items.map((item, i) => ({src: item.images.low_resolution.url, value: i, object: item}))}
+                    onPick = {(images) => useSelectedImages(images.map( element => { return element.src })) }
+                    multiple
+                    />
+                    { spinner }
+                    <span className="badge badge-light border border-primary col-md-12" style={{cursor: 'pointer'}} onClick={ () => loadInstItems(instagramService, token, items.slice(-1)[0].id) }>
+                    <img src={moreButton} />
+                    </span>
+            </div>
+            <Link className={"btn my-fixed-btn "+ isDisabled } to={{ pathname: '/new-trip',  state: { tripData }}}>
+                <img src={btn} style={{transform: 'rotate(90deg)'}}/>
+            </Link>
+        </div>
     );
 };
 
