@@ -28,15 +28,16 @@
       opacity: 0.1;
     }
 
-     .checked {
-        display: inline-block;
-        transition: .5s ease;
-        position: absolute;
-        top: 1px;
-        left: 40%;
-        font-size: 160px;
-        cursor: pointer;
-      }
+    .checked {
+      display: inline-block;
+      transition: .5s ease;
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      top: 1px;
+      font-size: 1000%;
+      cursor: pointer;
+    }
 
       .unchecked {
         display: none;
@@ -46,6 +47,13 @@
       clear: both;
     }
 
+  }
+
+  .place_img {
+    position: relative;
+    .checked {
+      font-size: 400%;
+    }
   }
 
   .card-text{

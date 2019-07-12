@@ -14,19 +14,18 @@ Image.propTypes = {
   isSelected: PropTypes.bool
 }
 
-export default function Image({ src, onImageClick, width, height, selectedIndex }) {
+export default function Image({ src, width, height, selectedIndex }) {
 
     return (
       <React.Fragment>
-        <div className={`responsive${selectedIndex > 0 ? " selected" : ""}`}
-          onClick={onImageClick}>
+        <div className={`responsive${selectedIndex > 0 ? " selected" : ""}`}>
           <img src={src}
             className={`thumbnail${selectedIndex > 0 ? " selected" : ""}`}
             style={ImageStyle(width, height)}
           />
         </div>
         <div className={ selectedIndex > 0 ? "checked" : "unchecked"}>
-          <span className="font-weight-bold">{selectedIndex}</span>
+          <span className="font-weight-bold text-center">{selectedIndex}</span>
         </div>
       </React.Fragment>
     )
