@@ -1,7 +1,7 @@
 import React, { useState }  from 'react';
 
 export default function ImageCarousel({ media }) {
-    
+    console.log(media)
     const images = [];
     const [index, useIndex] = useState(0);
     if (media.carousel) {

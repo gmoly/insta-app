@@ -61,7 +61,7 @@ function InstItemListContainer({items, loading, error, user, token, loadInstItem
 
         if (token === null) { return <Redirect to="/" /> }
 
-        const tripData = tripsService.mapInstItemsToTrip(selectedImages, user.id)
+        const tripData = tripsService.mapInstItemsToTrip(selectedImages, user)
 
         return <InstItemList loading={ loading } items={ items } token={ token } loadInstItems={ loadInstItems } instagramService={instagramService} tripData={tripData} useSelectedImages={useSelectedImages} />
 }

@@ -46,4 +46,11 @@ const signOutInstUser = () => () => (dispatch) => {
     dispatch(authDiscardToken());
 }
 
-export {fetchInstItems, authInstUser, signOutInstUser};
+const fetchProfileInfo = (instagramService, token, userId) => () => (dispatch) => {
+  dispatch(itemsRequested('FETCH_INST_PROFILE_REQUEST'));
+  instagramService.getProfileInfo(token, userId)
+  .then((data) => dispatch(itemsLoaded('FETCH_INST_PROFILE_SUCCESS',data)))
+  .catch((err) => dispatch(itemsError('FETCH_INST_PROFILE_FAILURE',err)));
+}
+
+export {fetchInstItems, authInstUser, signOutInstUser, fetchProfileInfo};

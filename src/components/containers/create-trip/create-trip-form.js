@@ -25,7 +25,8 @@ export default function TripForm({ items, handleSubmit, removeTrip }) {
       return ( { ...items,
                  'title': title,
                  'description': description,
-                 'places': places
+                 'places': places,
+                 'published': new Date().valueOf()
                 } )
     }
 

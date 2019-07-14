@@ -18,7 +18,7 @@ export default function PlaceImagePicker({ multiple, onPick, images }) {
     function renderImage(image, i) {
       return (
           <div key={"image_"+i} className="col-md-4 thumb">
-            <div className="place_img mb-3" onClick={() => handleImageClick(image)}>
+            <div className="place_img mb-3 d-flex justify-content-center" onClick={() => handleImageClick(image)}>
               <Image 
                 src={image.src}
                 width={180}

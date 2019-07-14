@@ -13,8 +13,9 @@ export default class InstagramService {
       return await res.json();
     };
 
-      getProfileInfo = async (token) => {
-        const info = await this.getResource(`/`,token);
+      getProfileInfo = async (token, userId) => {
+        const user = userId ? userId : 'self'
+        const info = await this.getResource(`/`+user,token);
         return this._transformProfileInfo(info);
       };
 
@@ -23,7 +24,7 @@ export default class InstagramService {
         if (last_id !== null) {
           param += "&max_id=" + last_id;
         }
-        const contents = await this.getResource(`/media/recent`,param);
+        const contents = await this.getResource(`/self/media/recent`,param);
         return contents.data.map(this._transformProfileContents);
       };
 
