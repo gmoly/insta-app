@@ -3,7 +3,7 @@ const updateAuthData = (state, action) => {
     if (state === undefined){
         return {
             token: null,
-            user: [],
+            user: null,
             loading: true,
             err: null
         };
@@ -13,14 +13,14 @@ const updateAuthData = (state, action) => {
             case 'AUTH_SET_TOKEN':
             return {
                 token: action.payload,
-                user: [],
+                user: null,
                 loading: true,
                 err: null
             };
             case 'AUTH_DISCARD_TOKEN': 
             return {
                 token: null,
-                user: [],
+                user: null,
                 loading: true,
                 err: null
             };
@@ -34,7 +34,7 @@ const updateAuthData = (state, action) => {
             case 'AUTH_FAILUR':
             return {
                 token: null,
-                user: [],
+                user: null,
                 loading: false,
                 err: action.payload
             };

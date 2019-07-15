@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 
-import Spinner from '../../spinner/spinner';
+import { Spinner } from '../../spinner/spinner';
 import { instagramServiceContext, tripsServiceContext } from '../../app-service-context/service-context';
 import { fetchInstItems } from '../../../actions';
 import ErrorIndicator from '../../error-indicator/error-indicator';

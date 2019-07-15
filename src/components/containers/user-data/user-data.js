@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Spinner from '../../spinner/spinner';
+import { Spinner } from '../../spinner/spinner';
 import { authInstUser } from '../../../actions';
 import ErrorIndicator from '../../error-indicator/error-indicator';
 import  { Redirect } from 'react-router-dom';

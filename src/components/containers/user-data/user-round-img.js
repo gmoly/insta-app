@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Spinner from '../../spinner/spinner';
+import { SpinnerImgLoading } from '../../spinner/spinner';
 import ErrorIndicator from '../../error-indicator/error-indicator';
 import { instagramServiceContext } from '../../app-service-context/service-context';
 import { fetchProfileInfo } from '../../../actions';
@@ -20,7 +20,7 @@ function UserDataContainer({ tripUser, user, loading, error, token, getUserData 
             return getImageTag(tripUser)
         }
 
-        if (loading) { return <Spinner /> }
+        if (loading) { return <SpinnerImgLoading /> }
         
         if (error) { return <ErrorIndicator /> }
 

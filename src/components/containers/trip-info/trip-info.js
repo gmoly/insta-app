@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { tripsServiceContext } from '../../app-service-context/service-context';
 import ErrorIndicator from '../../error-indicator/error-indicator';
-import Spinner from '../../spinner/spinner';
+import { Spinner } from '../../spinner/spinner';
 import { getTripById } from '../../../actions';
 
 import TripListItem from '../trip-list/trip-list-item'; 
