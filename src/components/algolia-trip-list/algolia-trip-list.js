@@ -1,9 +1,10 @@
 import algoliasearch from 'algoliasearch/lite';
-import { InstantSearch, Configure } from 'react-instantsearch-dom';
+import { InstantSearch, Configure, RefinementList } from 'react-instantsearch-dom';
 import React, { useState, useEffect } from 'react';
 import Hits from './trips-hits';
 import SearchBox from './algolia-search-bar';
 import Pagination from './algolia-pagination';
+import PreselectedFacet from './algolia-facet';
 import qs from 'qs';
 
 import './algolia-trip-list.css'
@@ -20,7 +21,7 @@ function urlToSearchState(location) {
   return searchState;
 }
 
-  export default function AlgoliaTripList({ location, history }) {
+  export default function AlgoliaTripList({ location, userId }) {
     const [searchState, useSearchState] = useState(urlToSearchState(location))
     const [lastLocation, useLastLocation] = useState(location)
   
@@ -32,6 +33,12 @@ function urlToSearchState(location) {
     function onSearchStateChange(searchState) {
         useSearchState(searchState);
     };
+
+    function isUserTripsPage() {
+      if(userId) {
+        return  <PreselectedFacet attribute="user.id" defaultRefinement={[userId]}/>
+      }
+    }
   
       return (
         <InstantSearch searchClient={searchClient} indexName="trips"
@@ -44,6 +51,7 @@ function urlToSearchState(location) {
               <Hits />
               <Pagination />
             </div>
+            { isUserTripsPage() }
           </InstantSearch>
       );
   }
