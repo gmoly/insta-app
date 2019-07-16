@@ -21,7 +21,6 @@ export default function placesData({items, updatePlaceData}) {
 }
    
 function placeData(place, index, updatePlaceData) {
-
                 const [title, useTitle] = useState(place.placeTitle);
                 const [description, useDescription] = useState(place.placeDescription);
                 const [location, useLocation] = useState(place.location);

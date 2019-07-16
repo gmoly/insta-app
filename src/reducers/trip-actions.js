@@ -2,7 +2,7 @@ const tripActions = (state, action) => {
 
     if (state === undefined){
         return {
-            trip: [],
+            trip: null,
             loading: true,
             error: null
         };
@@ -26,7 +26,7 @@ const tripActions = (state, action) => {
 
             case 'FETCH_TRIP_REQUEST':
             return {
-                trip: [], 
+                trip: null, 
                 loading: true,
                 error: null
             };
@@ -38,7 +38,7 @@ const tripActions = (state, action) => {
             };
             case 'FETCH_TRIP_FAILURE':
             return {
-                trip: [],
+                trip: null,
                 loading: false,
                 error: action.payload
             };

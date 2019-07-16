@@ -1,8 +1,10 @@
 import React, { useState, useEffect }  from 'react';
 import  PlacesData from './create-trip-form-place';
 import './create-trip-form.css'
+import { getTripById } from '../../../actions';
 
 export default function TripForm({ items, handleSubmit, removeTrip }) {
+    const [id, useId] = useState(items.id)
     const [places, usePlaces] = useState(items.places)
     const [title, useTitle] = useState(items.title)
     const [description, useDescription] = useState(items.description)
@@ -49,16 +51,16 @@ export default function TripForm({ items, handleSubmit, removeTrip }) {
 
     useEffect(() => {
         validate()
-    }, [title, description, placesValid])
+    }, [id, title, description, placesValid])
 
         return(
             <div className="container w-80">
                 <form onSubmit={ (e) => submit(e)}>
                     <fieldset>
                         <legend className="py-5 text-center">Share your trip data here</legend>
-                        {  idFieldData(items.id) }
                         <div className="row">
                             <div className="col-md-9 mb-3">
+                                { tripById() }
                                 <div className="form-group">
                                     <span className={"mb-2 " + titleValidation }>Trip title:</span>
                                     <input className="form-control" id="inputTitle" 
@@ -72,11 +74,12 @@ export default function TripForm({ items, handleSubmit, removeTrip }) {
                                 </div>
                             </div>
                             <div className="form-group col-md-3">
-                                <div className="mt-5 h-75">
+                                <div className="mt-3 h-75">
                                     <p className="text-center text-justify">Please enter title, description, and general places information,
                                     only when all data populated form can be submitted.
                                     </p>
-                                    <button type="submit" className="btn btn-primary d-block mx-auto" style={{marginBottom: "1%"}}  disabled={ validation } >Submit</button>
+                                    <button type="submit" className="btn btn-primary d-block mx-auto" style={{marginBottom: "5%", width: "100px"}}  disabled={ validation } >Submit</button>
+                                    { removeButton() }
                                 </div>
                             </div>
                         </div>    
@@ -89,18 +92,25 @@ export default function TripForm({ items, handleSubmit, removeTrip }) {
             </div>
             );
             
-            function idFieldData(id) {
+            function removeButton() {
                 if(id) {
                     return (
-                        <div className="form-group row">
-                        <button type="button" className="btn btn-danger" onClick={(e) => rmTrip(e, id) }>Remove trip</button>
-                        <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Trip id</label>
-                        <div className="col-sm-10">
-                            <input ref="generalId" type="text" readOnly className="form-control-plaintext" id="tripId" defaultValue={id} />
-                        </div>
-                    </div>
+                        <button type="button" className="btn btn-danger d-block mx-auto" style={{marginBottom: "1%", width: "100px"}} onClick={(e) => rmTrip(e, id) } >Remove</button>
                     )
                 } 
+            }
+
+            function tripById(){
+                if(id){
+                    return (
+                        <div className="form-group">
+                            <span className="mx-1">Trip id:</span>
+                            <span className="badge badge-pill badge-light"><strong>{id}</strong></span>
+                            <span className="mx-1">Published:</span>
+                            <span className="badge badge-pill badge-light"><strong>{new Date(Number(items.published)).toLocaleString()}</strong></span>
+                        </div>
+                    )
+                }
             }
         
         

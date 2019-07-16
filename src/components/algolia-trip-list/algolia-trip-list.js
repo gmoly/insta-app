@@ -1,6 +1,6 @@
 import algoliasearch from 'algoliasearch/lite';
-import { InstantSearch, Configure, RefinementList } from 'react-instantsearch-dom';
-import React, { useState, useEffect } from 'react';
+import { InstantSearch, Configure } from 'react-instantsearch-dom';
+import React, { useState } from 'react';
 import Hits from './trips-hits';
 import SearchBox from './algolia-search-bar';
 import Pagination from './algolia-pagination';
@@ -34,10 +34,14 @@ function urlToSearchState(location) {
         useSearchState(searchState);
     };
 
-    function isUserTripsPage() {
+    function userTripsPage() {
       if(userId) {
         return  <PreselectedFacet attribute="user.id" defaultRefinement={[userId]}/>
       }
+    }
+
+    function isUserTripsPage() {
+      return location.pathname === '/user-trips'
     }
   
       return (
@@ -48,10 +52,10 @@ function urlToSearchState(location) {
           <Configure hitsPerPage={1} />
             <div className="search-result light">
               <SearchBox />
-              <Hits />
+              <Hits isUserTripsPage={isUserTripsPage()} userId = {userId} />
               <Pagination />
             </div>
-            { isUserTripsPage() }
+            { userTripsPage() }
           </InstantSearch>
       );
   }

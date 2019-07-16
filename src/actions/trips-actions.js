@@ -24,8 +24,9 @@ const removeTrip = (id, tripService) => () => (dispatch) => {
 
 const getTripById = (id, tripService) => () => (dispatch) => {
     dispatch(itemsRequested('FETCH_TRIP_REQUEST'));
+    console.log(id)
     tripService.getTripById(id)
-    .then((result) => { if (result.exists()) { return dispatch(itemsLoaded('FETCH_TRIP_SUCCESS', result.val()))} }) 
+    .then((result) => {if (result.exists()) { return dispatch(itemsLoaded('FETCH_TRIP_SUCCESS', {...result.val(), id: id}))} }) 
     .catch((err) => dispatch(itemsError('FETCH_TRIP_FAILURE', err)))
 }
 
