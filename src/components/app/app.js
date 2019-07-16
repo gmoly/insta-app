@@ -8,6 +8,7 @@ import { UserDataPage } from '../pages/user-data-page';
 import { ContentsPage } from '../pages/contents-page';
 import  UserTripsPage   from '../pages/user-trips-page';
 import Header from '../pages/header';
+import Footer from '../pages/footer';
 
 import './app.css';
 
@@ -26,8 +27,8 @@ const App = () => {
             <Route path="/edit-trip" component={EditTripPage} exact />
             <Route path="/user-trips" component={UserTripsPage} exact/>
             <Route path="/user-trips/:userId" component={UserTripsPage} />
-            
         </Switch>
+        <Footer />
         </Fragment>
     );
 };
