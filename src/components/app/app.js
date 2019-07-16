@@ -18,16 +18,18 @@ const App = () => {
     return (
         <Fragment>
         <Header />
-        <Switch>
-            <Route path="/auth-instagram" exect component={UserDataPage}/>
-            <Route path="/inst" component={ContentsPage} exact />
-            <Route path="/" component={TripsPage} exact />
-            <Route path="/trip/:tripId" component={TripPage} exact />
-            <Route path="/new-trip" component={NewTripPage} exact />
-            <Route path="/edit-trip" component={EditTripPage} exact />
-            <Route path="/user-trips" component={UserTripsPage} exact/>
-            <Route path="/user-trips/:userId" component={UserTripsPage} />
-        </Switch>
+        <main role="main">
+            <Switch>
+                <Route path="/auth-instagram" exect component={UserDataPage}/>
+                <Route path="/inst" component={ContentsPage} exact />
+                <Route path="/" component={TripsPage} exact />
+                <Route path="/trip/:tripId" component={TripPage} exact />
+                <Route path="/new-trip" component={NewTripPage} exact />
+                <Route path="/edit-trip" component={EditTripPage} exact />
+                <Route path="/user-trips" component={UserTripsPage} exact/>
+                <Route path="/user-trips/:userId" component={UserTripsPage} />
+            </Switch>
+        </main>
         <Footer />
         </Fragment>
     );

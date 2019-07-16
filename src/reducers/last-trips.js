@@ -1,36 +1,36 @@
-const updateTripList = (state, action) => {
+const lastTrips = (state, action) => {
 
     if (state === undefined){
         return {
-            trips: [],
+            trips: null,
             loading: true,
             error: null
         };
     }
 
         switch (action.type) {
-            case 'FETCH_TRIPS_REQUEST':
+            case 'FETCH_LAST_TRIPS_REQUEST':
             return {
-                trips: [], 
+                trips: null, 
                 loading: true,
                 error: null
             };
-            case 'FETCH_TRIPS_SUCCESS': 
+            case 'FETCH_LAST_TRIPS_SUCCESS': 
             return {
                 trips: action.payload,
                 loading: false,
                 error: null
             };
-            case 'FETCH_TRIPS_FAILURE':
+            case 'FETCH_LAST_TRIPS_FAILURE':
             return {
-                trips: [],
+                trips: null,
                 loading: false,
                 error: action.payload
             };
 
             default: 
-                return state.tripList;
+                return state.lastTrips;
     }
 }
 
-export default updateTripList;
+export default lastTrips;

@@ -48,6 +48,10 @@ export default class TripsService {
         return database.ref('/trips/' + tripId).once('value');
     }
 
+    getLastTrips(count) {
+        return database.ref('/trips').limitToLast(count).once('value');
+    }
+
     removeTrip(id) {
         return database.ref('/trips').child(id).remove();
     }

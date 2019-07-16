@@ -49,7 +49,7 @@ function urlToSearchState(location) {
                       searchState={ searchState }
                       onSearchStateChange={ onSearchStateChange }
                       createURL={createURL} >
-          <Configure hitsPerPage={1} />
+          <Configure hitsPerPage={2} />
             <div className="search-result light">
               <SearchBox />
               <Hits isUserTripsPage={isUserTripsPage()} userId = {userId} />
