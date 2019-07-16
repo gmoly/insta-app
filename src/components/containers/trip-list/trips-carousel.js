@@ -1,9 +1,7 @@
 import React, { useState }  from 'react';
-import { relative } from 'path';
 
 export default function TripsCarousel({ trips }) {
     const [index, useIndex] = useState(0);
-    const timer = setInterval(() => { moveToImage(index+1) }, 5000);
 
     function  moveToImage(i) {
         var index = i
