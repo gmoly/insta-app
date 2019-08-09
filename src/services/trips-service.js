@@ -1,35 +1,16 @@
-import { database } from './firebase-service';
+//import { database } from './firebase-service';
+import { get_trips, get_trip, get_last_trips, add_trip, update_trip, remove_trip } from './mongo-db-service';
 
 export default class TripsService {
 
-    data = [
-        {
-            id: 'tripId1',
-            userId: 'userId1',
-            title: 'Trip 1',
-            description: 'Description for trip 1',
-            baseStyle: {},
-            places: [{
-                placeTitle: 'Place 1',
-                placeDescription: 'Place description 1',
-                media: {},
-                location: {},
-                source: {
-                    id: 'source_id',
-                    type: 'INSTAGRAM'
-                },
-                style: {}
-            }]
-        }
-    ];
-
     getTrips() {
-        return new Promise((resolve, reject) => {
+        /*return new Promise((resolve, reject) => {
             setTimeout(() => {
               resolve(this.data)
               // reject(new Error('Issue!!!'))
             }, 1000);
-        });
+        });*/
+        return get_trips();
     }
 
     saveTrip(tripData) {
@@ -37,23 +18,28 @@ export default class TripsService {
         const result = { ...tripData }
         delete result.id
         if(id===null || id==='') {
-            return database.ref('/trips').push(result);
+           // return database.ref('/trips').push(result);
+           return add_trip()
         } else {
-            return database.ref('/trips/' + tripData.id).set(result);            
+          //  return database.ref('/trips/' + tripData.id).set(result);
+          return update_trip(id)           
         }
        
     }
 
-    getTripById(tripId) {
-        return database.ref('/trips/' + tripId).once('value');
+    getTripById(id) {
+       // return database.ref('/trips/' + tripId).once('value');
+       return get_trip(id);
     }
 
     getLastTrips(count) {
-        return database.ref('/trips').limitToLast(count).once('value');
+        //return database.ref('/trips').limitToLast(count).once('value');
+        return get_last_trips(count);
     }
 
     removeTrip(id) {
-        return database.ref('/trips').child(id).remove();
+       // return database.ref('/trips').child(id).remove();
+       return remove_trip(id);
     }
 
     mapInstItemsToTrip(items, user) {
