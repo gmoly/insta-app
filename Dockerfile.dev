@@ -3,5 +3,6 @@ WORKDIR /usr/app/insta-app
 COPY ./package*.json ./ 
 RUN npm install
 COPY ./ ./
+RUN npm rebuild node-sass
 EXPOSE 3000
 CMD ["npm", "start"]

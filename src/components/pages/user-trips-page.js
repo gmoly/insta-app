@@ -4,7 +4,6 @@ import AlgoliaTripList from '../algolia-trip-list/algolia-trip-list'
 import  { Redirect } from 'react-router-dom';
 
 const UserTripsPage = ({ location, match, loggedInUser }) => {
-   console.log(loggedInUser);
    var userId = match.params.userId
    userId = !userId && loggedInUser ? loggedInUser.id : userId
 

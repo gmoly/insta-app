@@ -2,7 +2,6 @@ import React from 'react';
 import ImageCarousel from '../../images/image-carousel';
 
 const TripPlace = ({ place, index }) => {
-    console.log(place)
     return( 
         <div className="mb-3 border rounded-bottom">
             <div className="m-3">

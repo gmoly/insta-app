@@ -1,5 +1,5 @@
 import React from 'react';
-import AlgoliaTripList from '../algolia-trip-list/algolia-trip-list'
+import ElasticTripList from '../containers/elastic-trip-list/elastic-trip-list'
 import LastTripsCarousel from '../containers/trip-list/last-trips-list'
 
 const TripsPage = ({ location, history }) => {
@@ -7,7 +7,7 @@ const TripsPage = ({ location, history }) => {
       <React.Fragment>
          <LastTripsCarousel />
          <br/>
-         <AlgoliaTripList location={ location }  history={ history } />
+         <ElasticTripList location={ location }  history={ history } from={0} size={10} />
       </React.Fragment>
    );
 };
