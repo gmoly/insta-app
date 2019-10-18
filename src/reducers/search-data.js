@@ -2,7 +2,7 @@ const searchData = (state, action) => {
 
     if (state === undefined){
         return {
-            hits: null,
+            searchResult: null,
             loading: true,
             error: null
         };
@@ -11,19 +11,19 @@ const searchData = (state, action) => {
         switch (action.type) {
             case 'SEARCH_TRIPS_REQUEST':
             return {
-                hits: null, 
+                searchResult: null, 
                 loading: true,
                 error: null
             };
             case 'SEARCH_TRIPS_SUCCESS': 
             return {
-                hits: action.payload,
+                searchResult: action.payload,
                 loading: false,
                 error: null
             };
             case 'SEARCH_TRIPS_FAILURE':
             return {
-                hits: null,
+                searchResult: null,
                 loading: false,
                 error: action.payload
             };

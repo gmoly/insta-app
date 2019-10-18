@@ -7,7 +7,7 @@ const TripsPage = ({ location, history }) => {
       <React.Fragment>
          <LastTripsCarousel />
          <br/>
-         <ElasticTripList location={ location }  history={ history } from={0} size={10} />
+         <ElasticTripList location={ location } />
       </React.Fragment>
    );
 };

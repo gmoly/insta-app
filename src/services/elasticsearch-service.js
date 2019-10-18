@@ -14,9 +14,6 @@ findTrips(from, size) {
 }
 
     _baseBody = (query) => {
-        return axios.get('http://localhost:3050/trips/_search', {
-            data: JSON.stringify(query),
-        }
-        )
+        return axios.post('http://localhost:3050/trips/_search', query)
     }
 }
