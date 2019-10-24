@@ -19,10 +19,10 @@ export default class TripsService {
         delete result.id
         if(id===null || id==='') {
            // return database.ref('/trips').push(result);
-           return add_trip()
+           return add_trip(result)
         } else {
           //  return database.ref('/trips/' + tripData.id).set(result);
-          return update_trip(id)           
+          return update_trip(id, result)           
         }
        
     }

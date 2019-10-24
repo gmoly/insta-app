@@ -9,7 +9,7 @@ import ProfileInfo from './profile-info';
     var redirectUrl = "&redirect_uri=http://localhost:3000/auth-instagram"
 
 function HeaderDataContainer( {token, user, signOut }) {
-        if(token) {
+        if(token && user) {
            return <ProfileInfo user={user} signOut={signOut} />
         } else {
            return <a className="btn btn-secondary my-2 my-sm-0" href={instagramAuthPath + clientId + redirectUrl} role="button">Sign In</a>

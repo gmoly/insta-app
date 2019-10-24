@@ -2,15 +2,27 @@ import axios from 'axios';
 
 export default class TripsService {
 
-findTrips(from, size) {
+findTrips(from, size, query) {
     if(!size)
         var size = 10
     if(!from)
         var from = 0
-    var query = {
-         "from" : from, "size" : size 
+    var body = {
+         "from" : from, 
+         "size" : size 
     }
-    return this._baseBody(query)
+    if (query) {
+        body = {...body, 
+            "query": {
+                "query_string" : {
+                    "query" : "*"+query+"*",
+                    "fields" : ["title", "description"]
+                }
+            }    
+        }
+    }
+
+    return this._baseBody(body)
 }
 
     _baseBody = (query) => {

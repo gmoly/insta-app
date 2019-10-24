@@ -1,18 +1,9 @@
-html,body{
-    height:100%;
-}
-
 #main, #main>.row {
   height:90%;
 }
 
-.places-block {
-  position: relative;
-  width: 400px;
-}
-
 #left {
-  height:90%;
+  height:85%;
   width: 66.5%;
   overflow-y:scroll;
   position: fixed;
@@ -20,10 +11,9 @@ html,body{
 
 #map-canvas {
   width:33.4%;
-  height:90%;
+  height:85%;
   position:fixed;
   right:0;
   top:56px;
   bottom:0;
 }
-

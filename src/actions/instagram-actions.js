@@ -26,6 +26,19 @@ function authSetToken(token) {
       payload: err
     };
   }
+
+  function addOrUpdateUser(data, usersService) {
+    console.log(data);
+      if(data.id) {
+        usersService.getUser(data.id)
+        .then((user) => { console.log(user); if(user.data) {
+          usersService.updateUser(data, user.data._id)
+        } else {
+          usersService.addUser(data)
+        } })
+       .catch((err) => console.log('issue when saving user in db: '+err))
+      }
+  }
   
 
 const fetchInstItems = (instagramService, token, last_id) => () => (dispatch) => {
@@ -35,10 +48,10 @@ const fetchInstItems = (instagramService, token, last_id) => () => (dispatch) =>
     .catch((err) => dispatch(itemsError('FETCH_INST_ITEMS_FAILURE',err)));
 }
 
-const authInstUser = (instagramService, token) => () => (dispatch) => {
+const authInstUser = (instagramService, usersService, token) => () => (dispatch) => {
     dispatch(authSetToken(token));
     instagramService.getProfileInfo(token)
-    .then((data) => dispatch(authSetUser(data)))
+    .then((data) => { addOrUpdateUser(data,usersService); dispatch(authSetUser(data))})
     .catch((err) => dispatch(authError(err)));
 }
 
@@ -46,10 +59,10 @@ const signOutInstUser = () => () => (dispatch) => {
     dispatch(authDiscardToken());
 }
 
-const fetchProfileInfo = (instagramService, token, userId) => () => (dispatch) => {
+const fetchProfileInfo = (usersService, userId) => () => (dispatch) => {
   dispatch(itemsRequested('FETCH_INST_PROFILE_REQUEST'));
-  instagramService.getProfileInfo(token, userId)
-  .then((data) => dispatch(itemsLoaded('FETCH_INST_PROFILE_SUCCESS',data)))
+  usersService.getUser(userId)
+  .then((user) => dispatch(itemsLoaded('FETCH_INST_PROFILE_SUCCESS',user.data)))
   .catch((err) => dispatch(itemsError('FETCH_INST_PROFILE_FAILURE',err)));
 }
 

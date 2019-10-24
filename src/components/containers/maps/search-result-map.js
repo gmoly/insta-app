@@ -1,13 +1,13 @@
-import React, { useRef, useEffect, useState } from 'react'
-import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
+import React from 'react'
+import { Map as LeafletMap, TileLayer, Marker } from 'react-leaflet';
 import {  iconInstagram  } from './icon';
 
 export default function Map( { places }) {
 
   function mapMarkers() {
-    return places.map( (element, i) => {
-      if (element.latitude && element.longitude) {
-          var geoPosition = [element.latitude, element.longitude];
+    return places.map( ({ location }, i) => {
+      if (location.latitude && location.longitude) {
+          var geoPosition = [location.latitude, location.longitude];
           return (
           <Marker
             position={geoPosition}
@@ -22,7 +22,7 @@ export default function Map( { places }) {
     return (
       <LeafletMap
         style={{width: '100%', height: '200px'}}
-        center={[places[0].latitude, places[0].longitude]}
+        center={[places[0].location.latitude, places[0].location.longitude]}
         zoom={10}
         minZoom={2}
         maxZoom={17}

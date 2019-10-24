@@ -19,6 +19,7 @@ const App = () => {
         <Fragment>
         <Header />
         <main role="main">
+            <div className="page-wrap">
             <Switch>
                 <Route path="/auth-instagram" exect component={UserDataPage}/>
                 <Route path="/inst" component={ContentsPage} exact />
@@ -29,6 +30,7 @@ const App = () => {
                 <Route path="/user-trips" component={UserTripsPage} exact/>
                 <Route path="/user-trips/:userId" component={UserTripsPage} />
             </Switch>
+            </div>
         </main>
         <Footer />
         </Fragment>

@@ -6,13 +6,13 @@ const Hits = ({ hits }) => (
     <ul className="list-unstyled">
             {hits.map(hit => (
             <li className="media border-bottom border-primary rounded-bottom m-3" key={hit._id}>
-               { trip(hit._source) }
+               { trip(hit._source, hit._id) }
             </li>
             ))}
     </ul>
 );
 
-const trip = (tripData) => (
+const trip = (tripData, id) => (
     <Fragment>
             <RoundProfileInfo tripUser={tripData.user} />
             <div className="media-body">
@@ -24,7 +24,7 @@ const trip = (tripData) => (
                         {tripData.places.map((item, i) => {
                             return(
                                 <li key={i}>
-                                    <p><u>{ (i+1) + ". " + item.place}</u></p>
+                                    <p><u>{ (i+1) + ". " + item.placeTitle}</u></p>
                                 </li>
                             )
                         })}
@@ -33,7 +33,7 @@ const trip = (tripData) => (
                 <div className="col-md-7"><Map places={tripData.places}/></div>
             </div>
             <p className="lead">
-                <a className="btn btn-primary btn-sm" href={"/trip/"+ tripData.objectID} role="button">Go to trip</a>
+                <a className="btn btn-primary btn-sm" href={"/trip/"+ id} role="button">Go to trip</a>
             </p>
             </div>
     </Fragment>      

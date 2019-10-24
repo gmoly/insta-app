@@ -9,7 +9,7 @@ import { getTripById } from '../../../actions';
 import TripListItem from '../trip-list/trip-list-item'; 
 
 function TripInfoContainer( { tripId, tripById, trip, loading, error } ) {
-
+        console.log(trip)
         const tripsService = useContext(tripsServiceContext);
 
         useEffect(() => { tripById(tripId, tripsService) },[]);

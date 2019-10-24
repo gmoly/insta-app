@@ -3,22 +3,18 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { SpinnerImgLoading } from '../../spinner/spinner';
 import ErrorIndicator from '../../error-indicator/error-indicator';
-import { instagramServiceContext } from '../../app-service-context/service-context';
+import { usersServiceContext } from '../../app-service-context/service-context';
 import { fetchProfileInfo } from '../../../actions';
 
 
-function UserDataContainer({ tripUser, user, loading, error, token, getUserData }) {
-        const instagramService = useContext(instagramServiceContext);
+function UserDataContainer({ tripUser, user, loading, error, getUserData }) {
+        const usersService = useContext(usersServiceContext);
         
         useEffect(() => {
-            if (token && tripUser) {
-                getUserData(instagramService, token, tripUser.id);
+            if (tripUser) {
+                getUserData(usersService, tripUser.id);
             }
         }, []);
-
-        if (!token) {
-            return getImageTag(tripUser)
-        }
 
         if (loading) { return <SpinnerImgLoading /> }
         
@@ -34,14 +30,14 @@ function getImageTag(user) {
 }
 
 
-const mapStateToProps = ( { authData : {token }, userData : { loading, error, user } }) => {
-    return { loading, error, user, token };
+const mapStateToProps = ( { userData : { loading, error, user } }) => {
+    return { loading, error, user };
 }
 
 const mapDispatchToProps = (dispatch) =>
 {
     return bindActionCreators (
-        { getUserData: (instagramService, token, id) => dispatch(fetchProfileInfo(instagramService, token, id)) },
+        { getUserData: (usersService, id) => dispatch(fetchProfileInfo(usersService, id)) },
          dispatch); 
  };
 
