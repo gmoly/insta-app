@@ -28,7 +28,6 @@ function authSetToken(token) {
   }
 
   function addOrUpdateUser(data, usersService) {
-    console.log(data);
       if(data.id) {
         usersService.getUser(data.id)
         .then((user) => { console.log(user); if(user.data) {
@@ -66,4 +65,11 @@ const fetchProfileInfo = (usersService, userId) => () => (dispatch) => {
   .catch((err) => dispatch(itemsError('FETCH_INST_PROFILE_FAILURE',err)));
 }
 
-export {fetchInstItems, authInstUser, signOutInstUser, fetchProfileInfo};
+const fetchProfilesInfo = (usersService, ids) => () => (dispatch) => {
+  dispatch(itemsRequested('FETCH_PROFILES_REQUEST'));
+  usersService.getUsers(ids)
+  .then((users) => dispatch(itemsLoaded('FETCH_PROFILES_SUCCESS',users.data)))
+  .catch((err) => dispatch(itemsError('FETCH_INST_PROFILES_FAILURE',err)));
+}
+
+export {fetchInstItems, authInstUser, signOutInstUser, fetchProfileInfo, fetchProfilesInfo};

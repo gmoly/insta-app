@@ -1,4 +1,4 @@
-import { get_user, update_user, add_user } from './mongo-db-service';
+import { get_user, get_users, update_user, add_user } from './mongo-db-service';
 
 export default class UsersService {
 
@@ -13,5 +13,9 @@ export default class UsersService {
     getUser(id) {
        return get_user(id);
     }
+
+    getUsers(ids) {
+      return get_users(ids);
+   }
 
 }
